@@ -57,9 +57,9 @@ public class Board extends JPanel implements ActionListener{
 
 	
 	public void actionPerformed (ActionEvent e) {
-		String [] commandString = e.getActionCommand().split("");
+		String [] commandString = e.getActionCommand().split("[^0-9]");
 		int i = Integer.parseInt(commandString[1]);
-		int j = Integer.parseInt(commandString[4]);
+		int j = Integer.parseInt(commandString[3]);
 		int xOneCoord = matriceBoard.xOneCoord;
 		int yOneCoord = matriceBoard.yOneCoord;
 		matriceBoard.moveOne(i, j);
