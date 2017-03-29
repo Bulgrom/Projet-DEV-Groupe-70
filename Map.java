@@ -10,14 +10,12 @@ public class Map {
 	private String name;
 	private String type;
 	private Square[][] map;
-	private File root;
 	private int[] dim = new int[2];
 	
 
 	
 	public Map(String filename) throws IOException{
-	    this.root = new File(filename);
-	    String[][] stringMap = readMap();
+	    String[][] stringMap = readMap(new File(filename));
 	    
 	    this.map = new Square[dim[0]][dim[1]];
 	    for(int i=0; i<dim[0]; i++){
@@ -87,8 +85,8 @@ public class Map {
 	    }
 	}
 
-	public String[][] readMap() throws IOException{
-		BufferedReader reader = new BufferedReader(new FileReader(this.root));
+	public String[][] readMap(File root) throws IOException{
+		BufferedReader reader = new BufferedReader(new FileReader(root));
 		this.name = reader.readLine();
 		this.type = reader.readLine();
 		String[] stringDim = reader.readLine().split("x");
