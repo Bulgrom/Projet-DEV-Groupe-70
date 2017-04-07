@@ -4,50 +4,45 @@ import java.io.IOException;
 
 public class GameLogger {
 	
-	private Logger logger;
-	/**Create a logger, needed to display messages
-	 * 
-	 */
-	public GameLogger(){
-		logger = Logger.getLogger("GameLogger");	
-	}
+	private static Logger logger = Logger.getLogger(GameLogger.class.getName());
 	
-	/**Create a new File to receive logs
+	
+	/**Write on fileName.txt + displays on console the message data
 	 * @param fileName
-	 */
-	public void setFileLogs(String fileName){
-		SimpleFormatter sf = new SimpleFormatter();
-		try{
-			FileHandler fh = new FileHandler(fileName+".txt", true);
-			fh.setFormatter(sf);
-			logger.addHandler(fh);
-
-		}
-		catch (SecurityException e){
-			logger.severe("Impossible d'ajouter ce fichier de logs");
-		}
-		catch (IOException e){
-			logger.severe("Impossible d'ajouter ce fichier de logs");
-		}
-	}
-	/**Prints on console (+files if created) Informations
 	 * @param data
 	 */
-	public void infoLogs(String data){
+	public static void writeInfoLogs(String fileName, String data){
+		SimpleFormatter sf = new SimpleFormatter();
+		try{
+			FileHandler fh = new FileHandler(fileName+".txt",true);
+			fh.setFormatter(sf);
+			logger.addHandler(fh);
+			logger.info(data);
+		} catch (SecurityException e){
+			logger.severe("Can't add this file");
+		} catch(IOException e){
+			logger.severe("Can't add this file");
+		}
+	}
+
+	/**Prints on console Informations
+	 * @param data
+	 */
+	public static void infoLogs(String data){
 		logger.info(data);
 	}
 	
 	/**Prints on console (+files if created) logs of severe Level
 	 * @param data
 	 */
-	public void severeLogs(String data){
+	public static void severeLogs(String data){
 		logger.severe(data);
 	}
 	
 	/**Prints on console (+files if created) logs of warning Level
 	 * @param data
 	 */
-	public void warningLogs(String data){
+	public static void warningLogs(String data){
 		logger.warning(data);
 	}
 }
