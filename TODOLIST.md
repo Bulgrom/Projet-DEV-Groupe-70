@@ -3,3 +3,4 @@
 - Editeur de niveau : permet de changer la nature des cases via une interface graphique.
 - Lecture de cartes : Chargement, modification via l'interface graphique puis sauvegarde.
 - Gestion des images via enumeration.
+- Récompenser Joris pour ses effort dans le projet
