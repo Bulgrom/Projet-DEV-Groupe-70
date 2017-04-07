@@ -1,27 +1,32 @@
 package gui;
 
 import java.awt.Dimension;
+import map.*;
 import java.awt.*;
-
 import javax.swing.*;
 import java.awt.event.*;
 import java.util.Arrays;
 
 public class Board extends JPanel implements ActionListener {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	int length;
 	int height;
 	JFrame frame;
 	Case listCase[][];
 	MatriceBoard matriceBoard;
 
-	public Board(int length, int height) {
-		this.length = length;
-		this.height = height;
-		matriceBoard = new MatriceBoard(length, height);
+	public Board(MatriceBoard matriceBoard) {
+		this.length = matriceBoard.length;
+		this.height = matriceBoard.height;
+		this.matriceBoard = matriceBoard;
 		listCase = new Case[length][height];
 		for (int j = 0; j < height; j++) {
 			for (int i = 0; i < length; i++) {
-				listCase[i][j] = new Case(i, j, matriceBoard.matrice[i][j]);
+				listCase[i][j] = new Case(i, j, matriceBoard.getMatrice()[i][j]);
 				listCase[i][j].addActionListener(this);
 				int[] coordinates = new int[2];
 				coordinates[0] = i;
@@ -35,6 +40,9 @@ public class Board extends JPanel implements ActionListener {
 		frame.setVisible(true);
 	}
 
+
+	
+	
 	public void initUI() {
 		frame = new JFrame();
 		frame.setTitle("C'est pas sorcier : Civil War");
@@ -58,7 +66,7 @@ public class Board extends JPanel implements ActionListener {
 		String[] commandString = e.getActionCommand().split("[^0-9]");
 		int i = Integer.parseInt(commandString[1]);
 		int j = Integer.parseInt(commandString[3]);
-		if (matriceBoard.matrice[i][j] != 0) {
+		if (matriceBoard.getMatrice()[i][j] != 0) {
 			if (matriceBoard.getNeedToMove()){
 				matriceBoard.setNeedToMove(false);
 			}
@@ -66,7 +74,7 @@ public class Board extends JPanel implements ActionListener {
 				matriceBoard.setXToMove(i);
 				matriceBoard.setYToMove(j);
 				matriceBoard.setNeedToMove(true);
-				matriceBoard.setValueToMove(matriceBoard.matrice[i][j]);
+				matriceBoard.setValueToMove(matriceBoard.getMatrice()[i][j]);
 			}
 		
 		}
@@ -74,7 +82,7 @@ public class Board extends JPanel implements ActionListener {
 			if (matriceBoard.getNeedToMove()) {
 				listCase[matriceBoard.getXToMove()][matriceBoard.getYToMove()].setIcon(null);	
 				matriceBoard.moveNumber(i, j);
-				listCase[i][j].chooseIcon(matriceBoard.matrice[i][j]);
+				listCase[i][j].chooseIcon(matriceBoard.getMatrice()[i][j]);
 
 			}
 			else {
@@ -85,12 +93,7 @@ public class Board extends JPanel implements ActionListener {
 
 	}
 
-	public static void main(String[] args) {
-		new Board(8, 8);
-
-	}
+	
 
 }
 
-
-//TO DO: FIX LE COUP DU "LES MATRICES SONT PAS DANS LE BON SENS XD"

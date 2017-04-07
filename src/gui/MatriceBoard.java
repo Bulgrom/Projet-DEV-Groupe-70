@@ -3,24 +3,21 @@ package gui;
 public class MatriceBoard {
 	int length;
 	int height;
-	int[][] matrice;
+	private int[][] matrice;
 	private int xToMove = -1;
 	private int yToMove = -1;
 	private boolean needToMove = false;
 	private int valueToMove = -1;
 	
 
-	public MatriceBoard(int length, int height) {
-		this.length = length;
-		this.height = height;
-		matrice = new int[this.length][this.height];
-		for (int j = 0; j < height; j++) {
-			matrice[0][j] = 2;
-			matrice[1][j] = 2;
-			matrice[length-1][j] = 1;
-			matrice[length-2][j] = 1;
+	public MatriceBoard(int[][] matrice) {
+		
+		this.length = matrice.length;
+		this.height = matrice[0].length;
+		this.matrice = matrice;
+		
 		}
-	}
+	
 	
 	public void setXToMove( int x) {
 		xToMove = x;
@@ -28,6 +25,17 @@ public class MatriceBoard {
 	public void setYToMove( int y) {
 		yToMove = y;
 	}
+	
+	public int[][] zeroMatrice(int length, int height) {
+		int [][] resultMatrice = new int[length] [height];
+		for (int i = 0; i < length; i++) {
+			for (int j = 0; j<height; j++) {
+				resultMatrice[i][j] = 0;
+			}
+		}
+		return resultMatrice;
+	}
+	
 	public int getXToMove () {
 		return xToMove;
 	}
@@ -57,6 +65,12 @@ public class MatriceBoard {
 			valueToMove = -1;
 			needToMove = false;
 		}
-
+	}
+	public void setMatrice(int[][] matrice) {
+		this.matrice = matrice;
+	}
+		
+	public int[][] getMatrice() {
+		return this.matrice;
 	}
 }
