@@ -1,0 +1,6 @@
+CHANGELOG (à compter du 07/04/2017)
+
+- 07/04/2017 :
+  - Séparation du main.
+  - Les constructeurs matriceBoard et Board prennent maintenant respectivement une matrice int[] [] et une matriceBoard en paramètre 
+  (au lieu de dimensions length et height).
