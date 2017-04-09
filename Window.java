@@ -28,11 +28,11 @@ public class Window extends JFrame {
 		
 		int i = 0;
 		
-		JButton resume = new JButton("Resume");	
-		JButton newGame = new JButton("New Game");
-		JButton levelSelect = new JButton("Select a level");
-		JButton options = new JButton ("Options");
-		JButton quit = new JButton("Quit");
+		MenuButton resume = new MenuButton("Resume");	
+		JButton newGame = new MenuButton("New Game");
+		JButton levelSelect = new MenuButton("Select a level");
+		JButton options = new MenuButton ("Options");
+		JButton quit = new MenuButton("Quit");
 
 		resume.setMaximumSize(new Dimension(500,40));
 		newGame.setMaximumSize(new Dimension(500,40));
