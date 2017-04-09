@@ -27,41 +27,60 @@ public class Window extends JFrame {
 	public Window() throws InterruptedException {
 		
 		int i = 0;
-		int height;
-		int width;
 		
 		JButton resume = new JButton("Resume");	
 		JButton newGame = new JButton("New Game");
 		JButton levelSelect = new JButton("Select a level");
+		JButton options = new JButton ("Options");
+		JButton quit = new JButton("Quit");
 
-		Background[] backgrounds = {new Background("forest.jpg"), new Background("longforest.jpg"), new Background ("darkforest.jpg")};
-		
 		resume.setMaximumSize(new Dimension(500,40));
 		newGame.setMaximumSize(new Dimension(500,40));
 		levelSelect.setMaximumSize(new Dimension(500,40));
+		options.setMaximumSize(new Dimension(500,40));
+		quit.setMaximumSize(new Dimension(500,40));
+		
+		JPanel content = new JPanel(); 
+		content.setOpaque(false);
+		content.setLayout(new BoxLayout(content,BoxLayout.PAGE_AXIS));
+		content.add(resume);
+		content.add(Box.createRigidArea(new Dimension(0,30)));
+		content.add(newGame);
+		content.add(Box.createRigidArea(new Dimension(0,30)));
+		content.add(levelSelect);
+		content.add(Box.createRigidArea(new Dimension(0,30)));
+		content.add(options);
+		content.add(Box.createRigidArea(new Dimension(0,30)));
+		content.add(quit);
+		
+		JPanel centerPane = new JPanel();
+		centerPane.setLayout(new BoxLayout(centerPane,BoxLayout.LINE_AXIS));
+		centerPane.add(Box.createVerticalGlue());
+		centerPane.add(content);
+		centerPane.add(Box.createVerticalGlue());
+		centerPane.setOpaque(false);
+
+		Background[] backgrounds = {new Background("forest.jpg"), new Background("longforest.jpg"), new Background ("darkforest.jpg")};
 		
 		this.setTitle("Game");
 		this.setSize(1000, 600);
 		this.setMinimumSize(new Dimension(600,438));
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		
+
 		while(true){
 
 			Background currentBackground = backgrounds[i%3];
 			currentBackground.setLayout(new BoxLayout(currentBackground,BoxLayout.PAGE_AXIS));
+			currentBackground.add(Box.createHorizontalGlue());
+			currentBackground.add(centerPane);
+			currentBackground.add(Box.createHorizontalGlue());
 
-			currentBackground.add(Box.createVerticalGlue());
-			currentBackground.add(resume);
-			currentBackground.add(newGame);
-			currentBackground.add(Box.createRigidArea(new Dimension(60,10)));
-			currentBackground.add(levelSelect);
-			currentBackground.add(Box.createVerticalGlue());
 			this.setContentPane(currentBackground);;
 			this.setVisible(true);
 			Thread.sleep(7000);
-			i++;
+			i++; 
+			//pour faire varier l'image de fond
 		}
   }
 
