@@ -28,13 +28,15 @@ import javax.swing.border.Border;
 
 import java.awt.Point;
 import java.awt.Color;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
-public class MenuButton extends JButton {
+public class MenuButton extends JButton implements MouseListener {
 	private Font newFont = new Font("Times New Roman",Font.ITALIC,30);
 	private String name;
 	private Image img;
-	GraphicsEnvironment ge = null ;
 	
+	GraphicsEnvironment ge = null ;
 	{try {
 		URL url = new URL("file:///C:/Users/Thaveau/workspace/Menu/newFont.ttf");
 	    ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
@@ -46,17 +48,17 @@ public class MenuButton extends JButton {
 		System.out.print("Nopebis");
 	}}
 	
-	
 	public MenuButton(String str){
 		super(str);
 		this.name = str;
 		try {
 			img = ImageIO.read(new File("BlackBackground.jpg"));
-			this.setBorderPainted(false);
+			//this.setBorderPainted(false);
 		}
 		catch (IOException e) {
 			e.printStackTrace();
 		}
+		this.addMouseListener(this);
 	}
 	
 	public void paintComponent(Graphics g){
@@ -67,7 +69,59 @@ public class MenuButton extends JButton {
 		this.drawCenteredString(g,this.name,new Rectangle(width,height),newFont.deriveFont((float) 50));
 	}
 	
-	//method from Internet, changed to correspond to the font used
+	
+	public void mouseClicked(MouseEvent event) { 
+		try {
+			img = ImageIO.read(new File("WhiteBackground.jpg"));
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	
+	public void mouseEntered(MouseEvent event) {
+		try {
+			img = ImageIO.read(new File("WhiteBackground.jpg"));
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+
+	public void mouseExited(MouseEvent event) { 
+		try {
+			img = ImageIO.read(new File("BlackBackground.jpg"));
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	
+	public void mousePressed(MouseEvent event) { 
+		try {
+			img = ImageIO.read(new File("WhiteBackground.jpg"));
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	
+	public void mouseReleased(MouseEvent event) { 
+		try {
+			img = ImageIO.read(new File("BlackBackground.jpg"));
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		}
+	}       
+
+	
+	
+	//method from Internet, with small changes to correspond to the font imported
 	public void drawCenteredString(Graphics g, String text, Rectangle rect, Font font) {
 	    // Get the FontMetrics
 	    FontMetrics metrics = g.getFontMetrics(font);

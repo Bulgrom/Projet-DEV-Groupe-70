@@ -20,19 +20,26 @@ import javax.imageio.ImageIO;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 
 public class Window extends JFrame {
   
+	MenuButton resume = new MenuButton("Resume");	
+	MenuButton newGame = new MenuButton("New Game");
+	MenuButton levelSelect = new MenuButton("Select a level");
+	MenuButton options = new MenuButton ("Options");
+	MenuButton quit = new MenuButton("Quit");
 	
 	public Window() throws InterruptedException {
-		
 		int i = 0;
-		
-		MenuButton resume = new MenuButton("Resume");	
-		JButton newGame = new MenuButton("New Game");
-		JButton levelSelect = new MenuButton("Select a level");
-		JButton options = new MenuButton ("Options");
-		JButton quit = new MenuButton("Quit");
+
+		resume.addActionListener(new Resume());
+		newGame.addActionListener(new NewGame());
+		levelSelect.addActionListener(new LevelSelect());
+		options.addActionListener(new Options());
+		quit.addActionListener(new Quit());
 
 		resume.setMaximumSize(new Dimension(500,40));
 		newGame.setMaximumSize(new Dimension(500,40));
@@ -82,6 +89,31 @@ public class Window extends JFrame {
 			i++; 
 			//pour faire varier l'image de fond
 		}
-  }
+	}
+	class Resume implements ActionListener {
+		public void actionPerformed(ActionEvent arg0){
+			System.out.print("Resume");
 
+		}
+	}
+	class NewGame implements ActionListener {
+		public void actionPerformed(ActionEvent arg0){
+			System.out.print("New Game !");
+		}
+	}	
+	class LevelSelect implements ActionListener {
+		public void actionPerformed(ActionEvent arg0){
+			System.out.print("Choosing Level");
+		}
+	}
+	class Options implements ActionListener {
+		public void actionPerformed(ActionEvent arg0){
+			System.out.print("Options");
+		}
+	}
+	class Quit implements ActionListener {
+		public void actionPerformed(ActionEvent arg0){
+			System.exit(0);
+		}
+	}
 }
