@@ -1,9 +1,9 @@
 CHANGELOG (à compter du 07/04/2017)
 
 - 10/04/2017 :
-  - MatriceBoard opère maintenant sur une matrice Square [] [] (au lieu de int [] []), afin d'intégrer la classe Map en vue de sauvegarder. 
-   Le reste du code a été modifié en conséquence (sauf testGUI, à faire).
-
+  - MatriceBoard opère maintenant sur une matrice Square [] [] (au lieu de int [] []).
+  - MatriceBoard possède maintenant un attribut de type map.
+  - La carte est maintenant sauvegardée à la fermeture de la fenêtre.
 
 
 
