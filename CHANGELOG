@@ -1,5 +1,12 @@
 CHANGELOG (à compter du 07/04/2017)
 
+- 10/04/2017 :
+  - MatriceBoard opère maintenant sur une matrice Square [] [] (au lieu de int [] []), afin d'intégrer la classe Map en vue de sauvegarder. 
+   Le reste du code a été modifié en conséquence (sauf testGUI, à faire).
+
+
+
+
 - 07/04/2017 :
   - Séparation du main.
   - Les constructeurs matriceBoard et Board prennent maintenant respectivement une matrice int[] [] et une matriceBoard en paramètre 
