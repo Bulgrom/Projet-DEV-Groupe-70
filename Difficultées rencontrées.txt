@@ -1,3 +1,0 @@
-Swing en général(communication entre bouton et panel et autre) (15+ heures?).
-Enumeration (en cours).
-Swing qui remplit pas dans le bon sens (1 heure).
