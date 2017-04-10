@@ -31,21 +31,23 @@ public class Window extends JFrame {
 	MenuButton levelSelect = new MenuButton("Select a level");
 	MenuButton options = new MenuButton ("Options");
 	MenuButton quit = new MenuButton("Quit");
+	int i = 0;
+	
+	Background screenMenu;
+	
+	
 	
 	public Window() throws InterruptedException {
-		int i = 0;
-
+		
+		
 		resume.addActionListener(new Resume());
 		newGame.addActionListener(new NewGame());
 		levelSelect.addActionListener(new LevelSelect());
 		options.addActionListener(new Options());
 		quit.addActionListener(new Quit());
-
-		resume.setMaximumSize(new Dimension(500,40));
-		newGame.setMaximumSize(new Dimension(500,40));
-		levelSelect.setMaximumSize(new Dimension(500,40));
-		options.setMaximumSize(new Dimension(500,40));
-		quit.setMaximumSize(new Dimension(500,40));
+		
+		JPanel screen = new JPanel();
+		screen.setLayout(new CardLayout());
 		
 		JPanel content = new JPanel(); 
 		content.setOpaque(false);
@@ -60,50 +62,75 @@ public class Window extends JFrame {
 		content.add(Box.createRigidArea(new Dimension(0,30)));
 		content.add(quit);
 		
-		JPanel centerPane = new JPanel();
-		centerPane.setLayout(new BoxLayout(centerPane,BoxLayout.LINE_AXIS));
-		centerPane.add(Box.createVerticalGlue());
-		centerPane.add(content);
-		centerPane.add(Box.createVerticalGlue());
-		centerPane.setOpaque(false);
-
-		Background[] backgrounds = {new Background("forest.jpg"), new Background("longforest.jpg"), new Background ("darkforest.jpg")};
+		JPanel centerMenu = new JPanel();
+		centerMenu.setLayout(new BoxLayout(centerMenu,BoxLayout.LINE_AXIS));
+		centerMenu.add(Box.createVerticalGlue());
+		centerMenu.add(content);
+		centerMenu.add(Box.createVerticalGlue());
+		centerMenu.setOpaque(false);
 		
-		this.setTitle("Game");
-		this.setSize(1000, 600);
-		this.setMinimumSize(new Dimension(600,438));
-		this.setLocationRelativeTo(null);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		while(true){
-
-			Background currentBackground = backgrounds[i%3];
-			currentBackground.setLayout(new BoxLayout(currentBackground,BoxLayout.PAGE_AXIS));
-			currentBackground.add(Box.createHorizontalGlue());
-			currentBackground.add(centerPane);
-			currentBackground.add(Box.createHorizontalGlue());
-
-			this.setContentPane(currentBackground);;
+			screenMenu = new Background("forest.jpg");
+			screenMenu.setOpaque(false);
+			screenMenu.setLayout(new BoxLayout(screenMenu,BoxLayout.PAGE_AXIS));
+			screenMenu.add(Box.createHorizontalGlue());
+			screenMenu.add(centerMenu);
+			screenMenu.add(Box.createHorizontalGlue());
+			
+			
+			this.setContentPane(screenMenu);
 			this.setVisible(true);
-			Thread.sleep(7000);
-			i++; 
-			//pour faire varier l'image de fond
-		}
+
 	}
 	class Resume implements ActionListener {
 		public void actionPerformed(ActionEvent arg0){
 			System.out.print("Resume");
-
+			Window.this.setContentPane(new Background("darkforest.jpg"));
+			Window.this.setVisible(true);
 		}
 	}
 	class NewGame implements ActionListener {
 		public void actionPerformed(ActionEvent arg0){
-			System.out.print("New Game !");
+
 		}
 	}	
 	class LevelSelect implements ActionListener {
 		public void actionPerformed(ActionEvent arg0){
-			System.out.print("Choosing Level");
+			
+			LevelButton levelButton = new LevelButton("levelButton","Level 1","BlackBackground.jpg","test");
+			levelButton.setOpaque(false);
+			JPanel comeBack = new JPanel();
+			comeBack.setPreferredSize(new Dimension(0,30));
+			JButton rightArrow = new JButton();
+			JButton leftArrow = new JButton();
+			JPanel pageLevel = new JPanel();
+			pageLevel.setPreferredSize(new Dimension(0,20));
+			
+			JPanel levelContent = new JPanel(new BorderLayout(5,5));
+			levelContent.setMaximumSize(new Dimension(545,363));
+			levelContent.setOpaque(false);
+			levelContent.add(comeBack,BorderLayout.NORTH);
+			levelContent.add(rightArrow,BorderLayout.EAST);
+			levelContent.add(leftArrow,BorderLayout.WEST);
+			levelContent.add(pageLevel,BorderLayout.SOUTH);
+			levelContent.add(levelButton,BorderLayout.CENTER);
+			
+			JPanel centerLevels = new JPanel();
+			centerLevels.setLayout(new BoxLayout(centerLevels,BoxLayout.PAGE_AXIS));
+			centerLevels.add(Box.createHorizontalGlue());
+			centerLevels.add(levelContent);
+			centerLevels.add(Box.createHorizontalGlue());
+			centerLevels.setOpaque(false);
+			
+			Background screenLevels = new Background("longforest.jpg");
+			screenLevels.setLayout(new BoxLayout(screenLevels,BoxLayout.LINE_AXIS));
+			screenLevels.add(Box.createVerticalGlue());
+			screenLevels.add(centerLevels);
+			screenLevels.add(Box.createVerticalGlue());
+			screenLevels.setOpaque(false);
+			
+			Window.this.setContentPane(screenLevels);
+			Window.this.setVisible(true);
 		}
 	}
 	class Options implements ActionListener {
@@ -116,4 +143,5 @@ public class Window extends JFrame {
 			System.exit(0);
 		}
 	}
+
 }

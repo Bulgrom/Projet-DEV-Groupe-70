@@ -29,6 +29,7 @@ public class Background extends JPanel {
 
 	
 	public Background(String name){
+		super();
 		this.name = name;
 	}
 	public void paintComponent(Graphics g){
@@ -45,7 +46,7 @@ public class Background extends JPanel {
 			
 			g.drawImage(img, 0, 0, perfectWidth, perfectHeight ,this);
 			g.drawImage(ImageIO.read(new File("Cadre.png")), (currentWidth/2)-300,(currentHeight/2)-200,600,400,this);
-			g.drawImage(ImageIO.read(new File("BlackBackground.jpg")), (currentWidth/2)-275,(currentHeight/2)-185,550,370,this);
+			g.drawImage(ImageIO.read(new File("BlackBackground.jpg")), (currentWidth/2)-277,(currentHeight/2)-185,550,370,this);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
