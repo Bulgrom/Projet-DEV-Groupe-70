@@ -1,0 +1,31 @@
+Les objets Map seront sauvegardés dans un fichier texte de la maniére suivante:
+
+
+Nom_de_la_Map         (Symboles autorisés : lettres minuscules a-z, majuscules A-Z, chifres 0-9, le tiret bas _, )
+taille_de_la_map      (Format utilisé : nbrxnbr
+                       Exemple : 43x15    correspond à une Map dont la matrice représentative comporte 43 lignes et 15 colonnes)
+Matrice_d'adjacence   (Chaque ligne dans le fichier texte correspond à une ligne de la matrice représentative
+                       Chaque colonne est délimitée par le caractère tiret bas _
+                       Chaque case est définie par une chaine de caractères qui est de la forme suivante (sans les espaces): 
+                                nbr b nbr h nbr e nbr p
+                                où le nombre devant b correspond à l'id de l'objet Background associé à la case,
+                                   le nombre devant h correspond à la hauteur de la case,
+                                   le nombre devant e correspond à l'id de l'objet Element associé à la case,
+                                   le nombre devant p correspond à l'id de l'objet Personage associé à la case
+                               L'ordre d'apparition des lettres doit être respecté,
+                               L'objet Background est forcement renseigné (0 correspond à une case vide)
+                               Si un des attributs à une valuer par defaut il est possible de ne pas renseigner le champ
+                               La derniere case d'une ligne n'a pas besoin e se finir par le caractere tiret bas _
+                       Exemples:
+                       32_6b_1b2h3e4p_5b6e_0 correspond à une ligne de 5 cases tel que :
+                                                - La premiere case ne comporte qu'un background d'id 32
+                                                - La deuxiéme case ne comporte qu'un background d'id 6
+                                                - La troisiéme case comporte un background d'id 1, une hauteur de 2, un element d'id 3, un personnage d'id 4
+                                                - La quatrieme case comporte un background d'id 5 et un element d'id 6
+                                                - La cinquiéme case est une case vide)
+Exemple du contenu d'un fichier de sauvegarde :
+test
+2x3
+1_2b3p_4b5h6e
+7b1h _0_0_
+
