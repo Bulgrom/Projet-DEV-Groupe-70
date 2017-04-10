@@ -1,21 +1,23 @@
 package gui;
+import map.*;
+
 
 public class MatriceBoard {
 	int length;
 	int height;
-	private int[][] matrice;
+	private Square[][] matrice;
 	private int xToMove = -1;
 	private int yToMove = -1;
 	private boolean needToMove = false;
-	private int valueToMove = -1;
+	private Square squareToMove = new Square("0");
+	private Map map;
 	
 
-	public MatriceBoard(int[][] matrice) {
-		
-		this.length = matrice.length;
-		this.height = matrice[0].length;
-		this.matrice = matrice;
-		
+	public MatriceBoard(Map map) {
+		this.matrice = map.getMap();
+		this.length = this.matrice.length;
+		this.height = this.matrice[0].length;
+		this.map = map;
 		}
 	
 	
@@ -49,28 +51,32 @@ public class MatriceBoard {
 		needToMove = x;
 	}
 
-	public void setValueToMove (int x) {
-		this.valueToMove = x;
+	public void setSquareToMove (Square x) {
+		this.squareToMove = x;
 		}
-	public int getValueToMove () {
-		return valueToMove;
+	public Square getValueToMove () {
+		return squareToMove;
 	}
 	
 	public void moveNumber(int xcoord, int ycoord) {
 		if (needToMove) {
-			matrice[xToMove][yToMove] = 0;
-			matrice[xcoord][ycoord] = valueToMove;
+			matrice[xToMove][yToMove] = new Square("0");
+			matrice[xcoord][ycoord] = squareToMove;
 			xToMove = -1;
 			yToMove = -1;
-			valueToMove = -1;
+			squareToMove = new Square("0");
 			needToMove = false;
 		}
 	}
-	public void setMatrice(int[][] matrice) {
+	public void setMatrice(Square[][] matrice) {
 		this.matrice = matrice;
 	}
 		
-	public int[][] getMatrice() {
+	public Square[][] getMatrice() {
 		return this.matrice;
 	}
+	public Map getMap() {
+		return map;
+	}
+
 }
