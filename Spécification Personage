@@ -1,4 +1,27 @@
 Les objets Personage seront sauvegardés dans un fichier texte de la maniére suivante:
 
-nom_du_personage
-identifiant
+nom_du_personage    (Symboles autorisés : lettres minuscules a-z, majuscules A-Z, chifres 0-9, le tiret bas _, )
+identifiant         (Sous la forme (sans les espaces): id nombre)
+point_de_vie        (sous la forme : pv nombre)
+point_de_mouvement  (sous la forme : pm nombre)
+point_d_action      (sous la forme : pa nombre)
+point_de_rage       (sous la forme : pr nombre)
+defence             (sous la forme : def nombre)
+defence_magique     (sous la forme : defm nombre)
+initiative          (sous la forme : vit nombre)
+competences         (competences contient un tableau des identifiant des competences : atk nombre_nombre_nombre...
+                     exemple : atk1_2_3_4   correspond à personage possédant les compétences d'identifiant 1, 2, 3 et 4
+                    L'ordre des lignes doit être respectées et aucune ne doit être oubliée)
+
+
+Exemple :
+test
+id1
+pv100
+pm6
+pa7
+pr2
+def60
+defm20
+vit40
+atk1_2_20_46_12
