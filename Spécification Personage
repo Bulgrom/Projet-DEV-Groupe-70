@@ -14,7 +14,7 @@ competences         (competences contient un tableau des identifiant des compete
                     L'ordre des lignes doit être respectées et aucune ne doit être oubliée)
 
 
-Exemple :
+Exemple du contenu d'un fichier de sauvegarde Personage:
 test
 id1
 pv100
