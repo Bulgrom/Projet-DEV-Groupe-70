@@ -1,0 +1,15 @@
+Compte rendu de la réunnion du 30 Mars 2017 :
+
+Important :
+  - Noter les difficultés rencontrées
+  - Hierarchiser le code
+  
+
+
+A faire :
+  - (GUI) Double-click pour deplacer un personnage
+  - (Github) Creer une partie source avec le planning, la to-do-list les donées...
+  - (All) Commencer les integration de codes
+  - (Map, Character) Mettre en place des Ecxeption et des test
+  - (Map, Character) Creer une specification pour la sauvegarde
+  - (Logger) Mettre en place le logger
