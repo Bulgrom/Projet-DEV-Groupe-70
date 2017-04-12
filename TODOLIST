@@ -1,0 +1,10 @@
+Liste des objectifs en cours oou à faire :
+
+  
+  
+  
+  
+  - (Ability) Utiliser la Reflexivité (Class.forName("atk")) ou une table de hashage à la place de la classe AbilityDataBase
+  - (Map, GUI) Mise en place d'un editeur de niveau
+  - (Character, GUI) Mise en place d'un editeur de personage
+  - (Menu) Regler les problemes de referencement
