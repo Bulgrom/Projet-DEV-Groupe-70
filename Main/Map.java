@@ -16,28 +16,39 @@ public class Map {
 
 	public Map(){}
 	
-	public Map(String directory) throws IOException{
+	public Map(String directory) throws IOException, InstantiationException, IllegalAccessException, ClassNotFoundException{
 	    String[][] stringMap = readMap(new File(directory + "Map.txt"));
 	    
 	    setMap(new Square[dim[0]][dim[1]]);
 	    for(int i=0; i<dim[0]; i++){
 	    	for(int j=0; j<dim[1]; j++){
-	    		setSquare(i,j,new Square(directory, stringMap[i][j]));
+	    		setSquare(i,j,new Square(directory, stringMap[i][j], i, j));
 	    	}
 	    }
 	   }
 	
-	public Map(String mapDirectory, String persDirectory) throws IOException{
+	public Map(String mapDirectory, String persDirectory) throws IOException, InstantiationException, IllegalAccessException, ClassNotFoundException{
 		String[][] stringMap = readMap(new File(mapDirectory + "Map.txt"));
 	    
 	    setMap(new Square[dim[0]][dim[1]]);
 	    for(int i=0; i<dim[0]; i++){
 	    	for(int j=0; j<dim[1]; j++){
-	    		setSquare(i,j,new Square(persDirectory, stringMap[i][j]));
+	    		setSquare(i,j,new Square(persDirectory, stringMap[i][j], i, j));
 	    	}
 	    }
 	}
 	
+	public Map(int length, int height){
+		map = new Square[length][height];
+		dim[0] = length;
+		dim[1] = height;
+		for(int i=0; i<length; i++){
+			for(int j=0; j<height; j++){
+				map[i][j] = new Square();
+				map[i][j].setBackground(new Background(1));
+			}
+		}
+	}
 	
 	public Map(String name, Square[][] map){
 		this.name = name;
@@ -131,7 +142,16 @@ public class Map {
 	    }
 	}
 
-	
+	public String toString(){
+		String str = "";
+		for(int i=0; i<dim[0]; i++){
+	    	for(int j=0; j<dim[1]; j++){
+	    		str += getSquare(i,j) + " ";
+	    	}
+	    	str += backSpace;
+	    }
+		return str;
+	}
 	
 
 

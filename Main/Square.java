@@ -6,12 +6,14 @@ public class Square {
 	private Background background;
 	private int height = 0;
 	private Element elem;
-	private Personage pers;
+	private Character pers;
+	private int[] coord = new int[2];
 	
 	
 	public Square(){}
 	
-	public Square(String directory, String codex) throws IOException{
+	public Square(String directory, String codex, int i, int j) throws IOException, InstantiationException, IllegalAccessException, ClassNotFoundException{
+		setCoord(i,j);
 		String[] separator = codex.split("b");
 		setBackground(new Background(Integer.parseInt(separator[0])));
 		if (separator.length == 2){
@@ -31,7 +33,7 @@ public class Square {
 		
 			separator = separator[0].split("p");
 			if (separator.length == 1){
-				setPersonage(new Personage(directory + "personage" +separator[0] + ".txt"));
+				setCharacter(new Character(directory + "personage" +separator[0] + ".txt"));
 			}
 		}
 	}
@@ -48,8 +50,12 @@ public class Square {
 		return elem;
 	}
 	
-	public Personage getPersonage(){
+	public Character getCharacter(){
 		return pers;
+	}
+	
+	public int[] getCoord(){
+		return coord;
 	}
 	
 	public void setBackground(Background background){
@@ -64,8 +70,13 @@ public class Square {
 		this.elem = elem;
 	}
 	
-	public void setPersonage(Personage pers){
+	public void setCharacter(Character pers){
 		this.pers = pers;
+	}
+	
+	public void setCoord(int i, int j){
+		coord[0] = i;
+		coord[1] = j;
 	}
 	
 	public String toString(){
