@@ -5,11 +5,11 @@ Liste des objectifs en cours oou à faire :
   
   - (All) Commencer les integration de codes
   
-  - (Map, Character) Mettre en place des Ecxeption et des test
+  - [julien] (Map, Character) Mettre en place des Ecxeption et des test
   
   - (Logger) Mettre en place le logger
   
-  - (Ability) Utiliser la Reflexivité (Class.forName("atk")) ou une table de hashage à la place de la classe AbilityDataBase
+  - [julien] (Ability) Utiliser la Reflexivité (Class.forName("atk")) ou une table de hashage à la place de la classe AbilityDataBase
   
   - (Map, GUI) Mise en place d'un editeur de niveau
   
