@@ -5,7 +5,6 @@ identifiant         (Sous la forme (sans les espaces): id nombre)
 point_de_vie        (sous la forme : pv nombre)
 point_de_mouvement  (sous la forme : pm nombre)
 point_d_action      (sous la forme : pa nombre)
-point_de_rage       (sous la forme : pr nombre)
 defence             (sous la forme : def nombre)
 defence_magique     (sous la forme : defm nombre)
 initiative          (sous la forme : vit nombre)
@@ -20,7 +19,6 @@ id1
 pv100
 pm6
 pa7
-pr2
 def60
 defm20
 vit40
