@@ -5,8 +5,8 @@ identifiant         (Sous la forme (sans les espaces): id nombre)
 point_de_vie        (sous la forme : pv_nombre)
 point_de_mouvement  (sous la forme : pm_nombre)
 point_d_action      (sous la forme : pa_nombre)
-defence             (sous la forme : def_nombre)
-defence_magique     (sous la forme : defM_nombre)
+defense             (sous la forme : def_nombre)
+defense_magique     (sous la forme : defM_nombre)
 initiative          (sous la forme : vit_nombre)
 competences         (competences contientle nom des competences et leur parametres : String,nbr,nbr_String_String,nbr...
                      exemple : atk Punch,50_Fireball,20   correspond à personage possédant les compétences Punch et Fireball de puissance respêctive 50 et 20
