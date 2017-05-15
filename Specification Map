@@ -7,10 +7,13 @@ taille_de_la_map      (Format utilisé : nbrxnbr
 Matrice_d'adjacence   (Chaque ligne dans le fichier texte correspond à une ligne de la matrice représentative
                        Chaque colonne est délimitée par le caractère tiret bas _
                        Chaque case est définie par une chaine de caractères qui est de la forme suivante (sans les espaces): 
-                                nbr b nbr h nbr e nbr p
+                                
+                                nbr b nbr h nbr e nbr t nbr p
+                                
                                 où le nombre devant b correspond à l'id de l'objet Background associé à la case,
                                    le nombre devant h correspond à la hauteur de la case,
                                    le nombre devant e correspond à l'id de l'objet Element associé à la case,
+                                   le nombre devant t correspond à l'id de l'objet Trap associé à la case,
                                    le nombre devant p correspond à l'id de l'objet Personage associé à la case
                                L'ordre d'apparition des lettres doit être respecté,
                                L'objet Background est forcement renseigné (0 correspond à une case vide)
