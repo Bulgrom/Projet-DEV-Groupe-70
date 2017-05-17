@@ -10,12 +10,17 @@ public class Square {
 	private Character pers;
 	private Trap trap;
 	private int[] coord = new int[2];
+	private Map map;
 	
 	
-	public Square(){}
+	public Square(int i, int j, Map map){
+		setCoord(i, j);
+		setMap(map);
+	}
 	
-	public Square(String codex, int i, int j, String directory) throws IOException, InstantiationException, IllegalAccessException, ClassNotFoundException{
+	public Square(String codex, int i, int j, String directory, Map map) throws IOException, InstantiationException, IllegalAccessException, ClassNotFoundException{
 		setCoord(i,j);
+		setMap(map);
 		String[] separator = codex.split("b");
 		setBackground(new Background(Integer.parseInt(separator[0])));
 		if (separator.length == 2){
@@ -71,6 +76,10 @@ public class Square {
 		return coord;
 	}
 	
+	public Map getMap(){
+		return map;
+	}
+	
 	public void setBackground(Background background){
 		this.background = background;
 	}
@@ -84,7 +93,11 @@ public class Square {
 	}
 	
 	public void setCharacter(Character pers){
-		this.pers = pers;
+		if(pers != null){
+			pers.setPosition(this);
+			this.pers = pers;
+		}
+		else this.pers = pers;
 	}
 	
 	public void setTrap(Trap trap){
@@ -94,6 +107,10 @@ public class Square {
 	public void setCoord(int i, int j){
 		coord[0] = i;
 		coord[1] = j;
+	}
+	
+	public void setMap(Map map){
+		this.map = map;
 	}
 	
 	public String toString(){

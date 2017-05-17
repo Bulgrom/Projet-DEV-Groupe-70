@@ -17,11 +17,12 @@ public class MapTest {
 	
 	@Before
 	public void before(){
+		System.out.println(backSpace + "Nouveau Test");
 		m = new Map(4,5);
 		m.setName("Test");
 		System.out.println(m);
 		
-		pers1 = new Character("pers1", 1, 1000, 5, 6, 80, 30, 10);
+		pers1 = new Character("pers1", 1, 1000, 3, 6, 80, 30, 10);
 		pers2 = new Character("pers2", 2, 1000, 5, 6, 50, 100, 20);
 		System.out.println(pers1);
 		System.out.println(pers2);
@@ -31,11 +32,12 @@ public class MapTest {
 		pers1.setAbilities(atk);
 		//pers2.setAbilities(atk);
 		
-		System.out.println("Fin du before");
+		System.out.println("Fin du before" + backSpace);
 	}
 	
 	@Test
 	public void testAttack() {
+		System.out.println("testAttack");
 		
 		m.getSquare(0,0).setCharacter(pers1);
 		m.getSquare(3,4).setCharacter(pers2);
@@ -56,6 +58,8 @@ public class MapTest {
 	
 	@Test
 	public void testSaveMap() throws InstantiationException, IllegalAccessException, ClassNotFoundException, IOException{
+		System.out.println("TestSaveMap");
+		
 		m.getSquare(0,1).setBackground(new Background(2));
 		m.getSquare(0, 2).setElement(new Element(1));
 		m.getSquare(1,0).setBackground(new Background(0));
@@ -80,6 +84,8 @@ public class MapTest {
 	
 	@Test
 	public void testSaveCharacter() throws InstantiationException, IllegalAccessException, ClassNotFoundException, IOException{
+		System.out.println("TestSaveCharacter");
+		
 		pers1.saveCharacterWithName("characterSave/");
 		System.out.println("pers1 sauvegarde avec nom");
 		
@@ -96,10 +102,38 @@ public class MapTest {
 		
 		Character c2 = new Character("characterSave/pers2.txt");
 		System.out.println("Character Chargee");
+		
+		assertTrue(c2.equals(pers2));
 	}
 	
 
-	
+	@Test
+	public void testMoveCharacter(){
+		System.out.println("testMoveCharacter");
+		
+		m.getSquare(0, 0).setCharacter(pers1);
+		m.getSquare(3, 4).setCharacter(pers2);
+		System.out.println(m);
+		
+		assertFalse(pers1.checkMove(m.getSquare(0, 4)));
+		pers1.move(m.getSquare(0, 4));
+		System.out.println(m);
+		
+		
+		assertTrue(pers1.checkMove(m.getSquare(1, 2)));
+		pers1.move(m.getSquare(1, 2));
+		System.out.println(m);
+		
+		pers1.move(m.getSquare(3, 2));
+		
+		assertFalse(pers1.checkMove(m.getSquare(3, 4)));
+		pers1.move(m.getSquare(3, 4));
+		
+		System.out.println(m);
+		
+		
+		
+	}
 	
 	
 }

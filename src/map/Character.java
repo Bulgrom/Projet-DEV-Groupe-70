@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Arrays;
+import java.lang.Math;
 
 import ability.*;
 
@@ -20,8 +21,6 @@ public class Character {
 	private int speed;
 	private Ability[] ability;
 	private Square position;
-	
-	public Character(){}
 	
 	public Character(String filename) throws IOException, InstantiationException, IllegalAccessException, ClassNotFoundException{
 	    readPlayer(new File(filename));
@@ -126,6 +125,7 @@ public class Character {
 		this.position = position;
 	}
 	
+	
 	public void setAbilities(Ability[] ability){
 		this.ability = new Ability[ability.length];
 		for (int i=0; i<ability.length;i++){
@@ -145,12 +145,17 @@ public class Character {
 	public void move(Square square){
 		if(checkMove(square)){
 			getPosition().setCharacter(null);
-			setPosition(square);
+			square.setCharacter(this);
+			
 		}
 	}
 	
 	public boolean checkMove(Square square){
 		if(!(square.getCharacter()==null)) return false;
+		if(Math.abs(position.getCoord()[0] - square.getCoord()[0]) 
+				+ Math.abs(position.getCoord()[1] - square.getCoord()[1]) > pm) return false;
+		Path path = new Path(position, square, pm);
+		if(!path.isReachable()) return false;
 		
 		return true;
 	}

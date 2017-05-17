@@ -12,8 +12,6 @@ public class Map {
 	private Square[][] map;
 	protected int[] dim = new int[2];
 	
-
-	public Map(){}
 	
 	public Map(String directory) throws IOException, InstantiationException, IllegalAccessException, ClassNotFoundException{
 	    String[][] stringMap = readMap(new File(directory + "Map.txt"));
@@ -21,26 +19,20 @@ public class Map {
 	    setMap(new Square[dim[0]][dim[1]]);
 	    for(int i=0; i<dim[0]; i++){
 	    	for(int j=0; j<dim[1]; j++){
-	    		setSquare(i,j,new Square(stringMap[i][j], i, j, directory));
+	    		setSquare(i,j,new Square(stringMap[i][j], i, j, directory, this));
 	    	}
 	    }
 	   }
 	
-	public Map(int length, int height){
-		map = new Square[length][height];
-		dim[0] = length;
-		dim[1] = height;
-		for(int i=0; i<length; i++){
-			for(int j=0; j<height; j++){
-				map[i][j] = new Square();
+	public Map(int height, int length){
+		map = new Square[height][length];
+		setDim(height, length);
+		for(int i=0; i<height; i++){
+			for(int j=0; j<length; j++){
+				map[i][j] = new Square(i, j, this);
 				map[i][j].setBackground(new Background(1));
 			}
 		}
-	}
-	
-	public Map(String name, Square[][] map){
-		this.name = name;
-		this.map = map;
 	}
 			
 	public String getName(){
@@ -78,6 +70,11 @@ public class Map {
 	
 	public void setSquare(int i, int j, Square square){
 		map[i][j] = square;
+	}
+	
+	public void setDim(int i, int j){
+		dim[0] = i;
+		dim[1] = j;
 	}
 	
 	public String[][] readMap(File root) throws IOException{
