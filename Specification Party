@@ -1,0 +1,7 @@
+Une parie (class Party) sauvegarde l'etat en cours dans un dossier contenant :
+  le fichier texte de la sauvegarde de la map
+  Un fichier texte par personnage en jeu (vivant ou mort)
+  Un fichier data contenant :
+        le nom de la partie,
+        la liste des pieges utilises et leur id dans cette partie,
+        la liste des elements utilises et leur id dans cette partie,
