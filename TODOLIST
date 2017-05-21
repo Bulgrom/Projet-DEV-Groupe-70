@@ -4,13 +4,9 @@ Liste des objectifs en cours oou à faire :
   - (Github) Creer une partie source avec le planning, les données...
   
   - (All) Commencer les integration de codes
-  
-  - [julien] (Map, Character) Mettre en place des Ecxeption et des test
-  
+   
   - (Logger) Mettre en place le logger
-  
-  - [julien] (Ability) Utiliser la Reflexivité (Class.forName("atk")) ou une table de hashage à la place de la classe AbilityDataBase
-  
+   
   - (Map, GUI) Mise en place d'un editeur de niveau
   
   - (Character, GUI) Mise en place d'un editeur de personage
@@ -18,11 +14,5 @@ Liste des objectifs en cours oou à faire :
   - (Menu) Regler les problemes de referencement
   
   - (GUI) Ajout d'un champ pour utiliser les compétences d'un personnage selectionné
-  
-  - (Map) création d'une map test
-  
-  - (Character) Creation de deux personnages test
-  
-  - (Game) Création d'une partie test (ensemble map et personnage)
   
   - (Menu, GUI) Lancement de la partie test
