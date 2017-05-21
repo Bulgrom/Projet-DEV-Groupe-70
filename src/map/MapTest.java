@@ -14,6 +14,7 @@ public class MapTest {
 	private Map m;
 	private Character pers1;
 	private Character pers2;
+	private Ability[] atk;
 	
 	@Before
 	public void before(){
@@ -27,8 +28,9 @@ public class MapTest {
 		System.out.println(pers1);
 		System.out.println(pers2);
 		
-		Ability[] atk = new Ability[1];
+		atk = new Ability[2];
 		atk[0] = new Punch(50);
+		atk[1] = new BasicArrow(50, 4);
 		pers1.setAbilities(atk);
 		//pers2.setAbilities(atk);
 		
@@ -36,22 +38,85 @@ public class MapTest {
 	}
 	
 	@Test
-	public void testAttack() {
-		System.out.println("testAttack");
+	public void testPunch() {
+		System.out.println("testPunch");
 		
 		m.getSquare(0,0).setCharacter(pers1);
-		m.getSquare(3,4).setCharacter(pers2);
+		m.getSquare(0,1).setCharacter(pers2);
 		
 		System.out.println(m);
 		System.out.println("");
 		
 		
 		System.out.println(pers2.getPV());
+		assertTrue(pers2.getPV() == 1000);
 		
-		pers1.getAbility(0).use(m.getMap()[3][4]);
+		pers1.useAbility(pers1.getAbility(0), m.getSquare(0,1));
+		assertTrue(pers2.getPV() == 950);
 		System.out.println(pers2.getPV());
 		
-		pers1.getAbility(0).use(m.getMap()[3][3]);
+		pers1.useAbility(new Punch(50), m.getSquare(0,1));
+		assertTrue(pers2.getPV() == 950);
+		System.out.println(pers2.getPV());
+		
+		pers1.useAbility(pers1.getAbility(0), m.getSquare(0,2));
+		assertTrue(pers2.getPV() == 950);
+		System.out.println(pers2.getPV());
+		
+		pers1.useAbility(pers1.getAbility(0), m.getSquare(1,0));
+		assertTrue(pers2.getPV() == 950);
+		System.out.println(pers2.getPV());
+		
+	}
+	
+	@Test
+	public void testBasicArrow(){
+		System.out.println("testBasicArrow");
+		
+		m.getSquare(0, 0).setCharacter(pers2);
+		m.getSquare(0, 1).setCharacter(pers2);
+		m.getSquare(1, 3).setCharacter(pers2);
+		m.getSquare(2, 1).setCharacter(pers2);
+		m.getSquare(2, 2).setCharacter(pers2);
+		m.getSquare(3, 2).setCharacter(pers2);
+		m.getSquare(3, 4).setCharacter(pers2);
+		m.getSquare(1, 4).setCharacter(pers1);
+		m.getSquare(2, 3).setElement(new Element(1, false, false));
+		m.getSquare(2, 4).setElement(new Element(2));
+		
+		System.out.println(m);
+		System.out.println("");
+		
+		
+		System.out.println(pers2.getPV());
+		assertTrue(pers2.getPV() == 1000);
+		
+		pers1.useAbility(pers1.getAbility(1), m.getSquare(0,0));
+		assertTrue(pers2.getPV() == 1000);
+		System.out.println(pers2.getPV());
+		
+		pers1.useAbility(pers1.getAbility(1), m.getSquare(0,1));
+		assertTrue(pers2.getPV() == 950);
+		System.out.println(pers2.getPV());
+		
+		pers1.useAbility(pers1.getAbility(1), m.getSquare(1,3));
+		assertTrue(pers2.getPV() == 900);
+		System.out.println(pers2.getPV());
+		
+		pers1.useAbility(pers1.getAbility(1), m.getSquare(2,1));
+		assertTrue(pers2.getPV() == 900);
+		System.out.println(pers2.getPV());
+		
+		pers1.useAbility(pers1.getAbility(1), m.getSquare(2,2));
+		assertTrue(pers2.getPV() == 900);
+		System.out.println(pers2.getPV());
+		
+		pers1.useAbility(pers1.getAbility(1), m.getSquare(3,2));
+		assertTrue(pers2.getPV() == 900);
+		System.out.println(pers2.getPV());
+		
+		pers1.useAbility(pers1.getAbility(1), m.getSquare(3,4));
+		assertTrue(pers2.getPV() == 850);
 		System.out.println(pers2.getPV());
 		
 	}

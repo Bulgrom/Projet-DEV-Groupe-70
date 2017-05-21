@@ -5,7 +5,7 @@ import java.util.LinkedList;
 public class Path {
 	private Square finalSquare;
 	private int maxRange;
-	private LinkedList<PathCouple> fifo = new LinkedList<PathCouple>();
+	private LinkedList<PathQueueObject> fifo = new LinkedList<PathQueueObject>();
 	private Square[] path;
 	private boolean reachable = false;
 	
@@ -13,12 +13,12 @@ public class Path {
 	public Path(Square initialSquare, Square finalSquare, int maxRange){
 		this.finalSquare = finalSquare;
 		this.maxRange = maxRange;
-		fifo.add(new PathCouple(initialSquare, 0, new Square[] {}));
+		fifo.add(new PathQueueObject(initialSquare, 0, new Square[] {}));
 		deepPath();
 	}
 	
 	private void deepPath(){
-		PathCouple currentSquare = fifo.getFirst();
+		PathQueueObject currentSquare = fifo.getFirst();
 		int[] maxDim = currentSquare.getSquare().getMap().getDim();
 		while ((currentSquare.getSquare() != finalSquare) && !(fifo.isEmpty()) ){
 			currentSquare = fifo.pop();
@@ -33,22 +33,22 @@ public class Path {
 				array[currentSquare.getPath().length] = currentSquare.getSquare();
 				
 				if(coord[0] < maxDim[0]-1 ){
-					fifo.add(new PathCouple(currentSquare.getSquare().getMap().getSquare(coord[0]+1, coord[1])
+					fifo.add(new PathQueueObject(currentSquare.getSquare().getMap().getSquare(coord[0]+1, coord[1])
 							,currentSquare.getDistance()+1, array) );
 				}
 				
 				if(coord[0] > 0 ){
-					fifo.add(new PathCouple(currentSquare.getSquare().getMap().getSquare(coord[0]-1, coord[1])
+					fifo.add(new PathQueueObject(currentSquare.getSquare().getMap().getSquare(coord[0]-1, coord[1])
 							,currentSquare.getDistance()+1, array) );
 				}
 				
 				if(coord[1] < maxDim[1]-1 ){
-					fifo.add(new PathCouple(currentSquare.getSquare().getMap().getSquare(coord[0], coord[1]+1)
+					fifo.add(new PathQueueObject(currentSquare.getSquare().getMap().getSquare(coord[0], coord[1]+1)
 							,currentSquare.getDistance()+1, array) );
 				}
 				
 				if(coord[1] > 0 ){
-					fifo.add(new PathCouple(currentSquare.getSquare().getMap().getSquare(coord[0], coord[1]-1)
+					fifo.add(new PathQueueObject(currentSquare.getSquare().getMap().getSquare(coord[0], coord[1]-1)
 							,currentSquare.getDistance()+1, array) );
 				}
 			}

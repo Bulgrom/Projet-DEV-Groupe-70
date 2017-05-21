@@ -5,9 +5,7 @@ import map.Square;
 		
 		public Ability(){};
 		
-
-		
-		public abstract void use(Square square);
+		public abstract void use(Square userLoc, Square aim);
 	
 		public abstract String getName();
 		
@@ -16,6 +14,8 @@ import map.Square;
 		public abstract void setParameters(String[] parameters);
 	
 		//public abstract String getDescription();
+		
+		public abstract boolean range(Square userLoc, Square aim);
 	
 
 }

@@ -6,11 +6,17 @@ public class Element {
 	private int id;
 	private String name;
 	private String spriteLoc;
-	private boolean hideView;
-	private boolean[] allowDir = new boolean[4];
+	private boolean allowView = true;
+	private boolean allowWalk = true;
 	
 	public Element(int id){
 		this.id = id;
+	}
+	
+	public Element(int id, boolean allowWalk, boolean hideView){
+		this.id = id;
+		this.allowWalk = allowWalk;
+		this.allowView = hideView;
 	}
 	
 	public int getId(){
@@ -25,29 +31,14 @@ public class Element {
 	return spriteLoc;
 }
 
-	public boolean getHideView(){
-	return hideView;
+	public boolean allowView(){
+	return allowView;
 }
 
-	public boolean[] getAllowDir(){
-	return allowDir;
+	public boolean isWalkable(){
+	return allowWalk;
 }
 
-	public boolean getNorth(){
-	return allowDir[0];
-}
-
-	public boolean getEast(){
-	return allowDir[1];
-}
-
-	public boolean getSouth(){
-	return allowDir[2];
-}
-
-	public boolean getWest(){
-	return allowDir[3];
-}
 
 	public void setId(int id){
 		this.id = id;
@@ -61,30 +52,14 @@ public class Element {
 		this.spriteLoc = spriteLoc;
 	}
 
-	public void setHideView(boolean hideView){
-		this.hideView = hideView;
+	public void setView(boolean hideView){
+		this.allowView = hideView;
 	}
 	
-	public void setAllowDir(boolean[] allowDir){
-		this.allowDir = allowDir;
+	public void setWalkable(boolean allowWalk){
+		this.allowWalk = allowWalk;
 	}
 
-	public void setNorth(boolean north){
-		allowDir[0] = north;
-	}
-	
-	public void setEast(boolean east){
-		allowDir[1] = east;
-	}
-	
-	public void setSouth(boolean south){
-		allowDir[2] = south;
-	}
-	
-	public void setWest(boolean west){
-		allowDir[3] = west;
-	}
-	
 	
 	
 }

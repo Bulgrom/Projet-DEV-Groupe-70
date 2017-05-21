@@ -21,6 +21,12 @@ public class Character {
 	private int speed;
 	private Ability[] ability;
 	private Square position;
+	private int maxPv;
+	private int maxPm;
+	private int maxPa;
+	private int maxDef;
+	private int maxDefM;
+	private int maxSpeed;
 	
 	public Character(String filename) throws IOException, InstantiationException, IllegalAccessException, ClassNotFoundException{
 	    readPlayer(new File(filename));
@@ -30,11 +36,17 @@ public class Character {
 		setName(name);
 		setId(id);
 		setPV(pv);
+		this.maxPv = pv;
 		setPM(pm);
+		this.maxPm = pm;
 		setPA(pa);
+		this.maxPa = pa;
 		setDef(def);
+		this.maxDef = def;
 		setDefM(defM);
+		this.maxDefM = defM;
 		setSpeed(speed);
+		this.maxSpeed = speed;
 		setAbilities(ability);
 	}
 	
@@ -42,11 +54,17 @@ public class Character {
 		setName(name);
 		setId(id);
 		setPV(pv);
+		this.maxPv = pv;
 		setPM(pm);
+		this.maxPm = pm;
 		setPA(pa);
+		this.maxPa = pa;
 		setDef(def);
+		this.maxDef = def;
 		setDefM(defM);
+		this.maxDefM = defM;
 		setSpeed(speed);
+		this.maxSpeed = speed;
 	}
 	
 	public int getId(){
@@ -142,6 +160,13 @@ public class Character {
 		}
 	}
 	
+	
+	public void useAbility(Ability ability, Square aim){
+		if(Arrays.asList(this.ability).contains(ability)){
+			ability.use(position, aim);
+		}else System.out.println(name + " ne connait pas la capacite " + ability);
+	}
+	
 	public void move(Square square){
 		if(checkMove(square)){
 			getPosition().setCharacter(null);
@@ -159,18 +184,35 @@ public class Character {
 		
 		return true;
 	}
-	
-	
+		
 	public void readPlayer(File root) throws IOException, InstantiationException, IllegalAccessException, ClassNotFoundException{
 		BufferedReader reader = new BufferedReader(new FileReader(root));
 		setName(reader.readLine());
 		setId(Integer.parseInt(reader.readLine()));
-		setPV(Integer.parseInt(reader.readLine()));
-		setPM(Integer.parseInt(reader.readLine()));
-		setPA(Integer.parseInt(reader.readLine()));
-		setDef(Integer.parseInt(reader.readLine()));
-		setDefM(Integer.parseInt(reader.readLine()));
-		setSpeed(Integer.parseInt(reader.readLine()));
+		String[] pv = reader.readLine().split("_");
+		setPV(Integer.parseInt(pv[0]));
+		this.maxPv = Integer.parseInt(pv[1]);
+		
+		String[] pm = reader.readLine().split("_");
+		setPM(Integer.parseInt(pm[0]));
+		this.maxPm = Integer.parseInt(pm[1]);
+		
+		String[] pa = reader.readLine().split("_");
+		setPA(Integer.parseInt(pa[0]));
+		this.maxPa = Integer.parseInt(pa[1]);
+		
+		String[] def = reader.readLine().split("_");
+		setDef(Integer.parseInt(def[0]));
+		this.maxDef = Integer.parseInt(def[1]);
+		
+		String[] defM = reader.readLine().split("_");
+		setDefM(Integer.parseInt(defM[0]));
+		this.maxDefM = Integer.parseInt(defM[1]);
+		
+		String[] speed = reader.readLine().split("_");
+		setSpeed(Integer.parseInt(speed[0]));
+		this.maxSpeed = Integer.parseInt(speed[1]);
+		
 		String lastLine = reader.readLine();
 		if(lastLine != null) 
 			setStringAbilities(lastLine.split("_"));
@@ -185,8 +227,14 @@ public class Character {
 		        file .createNewFile();
 		        final FileWriter writer = new FileWriter(file);
 		        try {
-		        	writer.write(name + backSpace + id + backSpace + pv + backSpace + pm + backSpace + pa + backSpace 
-		        					  + def + backSpace + defM + backSpace + speed + backSpace);
+		        	writer.write(name + backSpace 
+		        				+ id + backSpace 
+		        				+ pv + "_" + maxPv + backSpace 
+		        				+ pm + "_" + maxPm + backSpace 
+		        				+ pa + "_" + maxPa + backSpace 
+		        				+ def + "_" + maxDef + backSpace 
+		        				+ defM + "_" + maxDefM  + backSpace 
+		        				+ speed + "_" + maxSpeed + backSpace);
 		        if( ability != null){
 		        	for (int i=0; i<ability.length; i++){
 		        		writer.write(ability[i].getCodex() + "_");
@@ -210,8 +258,14 @@ public class Character {
 		        file .createNewFile();
 		        final FileWriter writer = new FileWriter(file);
 		        try {
-		        	writer.write(name + backSpace + id + backSpace + pv + backSpace + pm + backSpace + pa + backSpace 
-		        					  + def + backSpace + defM + backSpace + speed + backSpace);
+		        	writer.write(name + backSpace 
+	        				+ id + backSpace 
+	        				+ pv + "_" + maxPv + backSpace 
+	        				+ pm + "_" + maxPm + backSpace 
+	        				+ pa + "_" + maxPa + backSpace 
+	        				+ def + "_" + maxDef + backSpace 
+	        				+ defM + "_" + maxDefM  + backSpace 
+	        				+ speed + "_" + maxSpeed + backSpace);
 		        	if( ability != null){
 		        		for (int i=0; i<ability.length; i++){
 		        			writer.write(ability[i].getCodex() + "_");
@@ -228,7 +282,14 @@ public class Character {
 	}
 	
 	public String toString(){
-		return "name : "+name+" id : "+id+" pv : "+pv+" pm : "+pm+" pa : "+pa+" def : "+def+" defM : "+defM+" speed : "+speed;
+		return "name : " + name
+				+ " id : " + id 
+				+ " pv : " + pv + "/" + maxPv 
+				+ " pm : " + pm + "/" + maxPm
+				+ " pa : " + pa + "/" + maxPa
+				+ " def : " + def + "/" + maxDef
+				+ " defM : " + defM + "/" + maxDefM
+				+ " speed : " + speed + "/" + maxSpeed;
 	}
 	
 	public boolean equals(Object character){

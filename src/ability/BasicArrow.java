@@ -1,21 +1,21 @@
 package ability;
-import map.Square;
+
 import map.Character;
-import map.Map;
 import map.Element;
+import map.Map;
+import map.Square;
 
-
-public class Punch extends Ability {
-
+public class BasicArrow extends Ability{
 	private int damage;
 	private String name = "Punch";
-	private int radius = 1;
+	private int radius = 5;
 	//private String description;
 	
-	public Punch(){}
+	public BasicArrow(){}
 	
-	public Punch(int damage){
+	public BasicArrow(int damage, int radius){
 		this.damage = damage;
+		this.radius = radius;
 	}
 	
 	public String getName(){
@@ -23,17 +23,22 @@ public class Punch extends Ability {
 	}
 	
 	public String getCodex(){
-		return "Punch" + "-" + damage; 
+		return "BasicArrow" + "-" + damage + "-" + radius; 
 	}
 	
 	public void setDamage(int dmg){
 		this.damage = dmg;
 	}
 	
+	public void setRadius(int radius){
+		this.radius = radius;
+	}
+	
 	public void setParameters(String[] parameters){
-		if (parameters.length != 1) System.out.println("Erreur dans setParameters de Punch");
+		if (parameters.length != 2) System.out.println("Erreur dans setParameters de Punch");
 		
 		setDamage(Integer.parseInt(parameters[0]));
+		setRadius(Integer.parseInt(parameters[1]));
 	}
 	
 	public void use(Square userLocation, Square aim){
@@ -64,9 +69,5 @@ public class Punch extends Ability {
 
 		return true;
 	}
-	
-	
-	
-	
 	
 }
