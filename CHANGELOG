@@ -1,5 +1,29 @@
 CHANGELOG (à compter du 07/04/2017)
 
+
+-25/05/2017
+
+
+- Réécriture de tout le code afin d'implémenter 
+les nouvelles versions de Map, Abilty et tutti quanti.
+
+- Nouvelle classe Controller, qui regroupe toutes les actions que la classe Board va effectuer en cas d'input de l'utilisateur.
+
+- Le GUI prend maintenant en compte plusieurs actions (au lieu du simple mouvement).
+La communication avec le GUI se fait pour l'instant via la console en rentrant le numéro de la commande désirée
+(les numéros étant indiqués par l'application). Table de hashage utilisé, pas de int pour déclarer son type car int = primitive!
+
+- Nouveautés dans l'affichage (encadrement du personnage selectionné, affichage de la range d'une attaque sélectionnée).
+
+- MatriceBoard a été supprimée, son rôle étant maintenant entièrement assuré par Map et Controller
+
+
+A MODIFIER MAIS PAS MON CODE:
+
+Ajout d'un getAbilityLength dans la classe character.
+un petit toString sur ability svp?
+
+
 - 10/04/2017 :
   - MatriceBoard opère maintenant sur une matrice Square [] [] (au lieu de int [] []).
   - MatriceBoard possède maintenant un attribut de type map.
