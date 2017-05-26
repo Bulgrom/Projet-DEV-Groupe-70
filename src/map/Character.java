@@ -107,6 +107,14 @@ public class Character {
 		return ability[index];
 	}
 	
+	
+	public int getAbilityLength() {
+		if (ability == null) {
+			return 0;
+		}
+		else return ability.length;
+	
+	
 	public void setName(String name){
 		this.name = name;
 	}
