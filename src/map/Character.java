@@ -26,8 +26,8 @@ public class Character {
 	private int maxPa;
 	private int maxDef;
 	private int maxDefM;
-	private int maxSpeed;
-	private int playTime = 0;
+	private int playTime = 1;
+	private int team = 0;
 	
 	public Character(String filename) throws IOException, InstantiationException, IllegalAccessException, ClassNotFoundException{
 	    readPlayer(new File(filename));
@@ -47,7 +47,6 @@ public class Character {
 		setDefM(defM);
 		this.maxDefM = defM;
 		setSpeed(speed);
-		this.maxSpeed = speed;
 		setAbilities(ability);
 	}
 	
@@ -65,7 +64,6 @@ public class Character {
 		setDefM(defM);
 		this.maxDefM = defM;
 		setSpeed(speed);
-		this.maxSpeed = speed;
 	}
 	
 	public int getId(){
@@ -80,20 +78,40 @@ public class Character {
 		return pv;
 	}
 	
+	public int getMaxPV(){
+		return maxPv;
+	}
+	
 	public int getPM(){
 		return pm;
+	}
+	
+	public int getMaxPM(){
+		return maxPm;
 	}
 	
 	public int getPA(){
 		return pa;
 	}
 	
+	public int getMaxPA(){
+		return maxPa;
+	}
+	
 	public int getDef(){
 		return def;
 	}
 	
+	public int getMaxDef(){
+		return maxDef;
+	}
+	
 	public int getDefM(){
 		return defM;
+	}
+	
+	public int getMaxDefM(){
+		return maxDefM;
 	}
 	
 	public int getSpeed(){
@@ -106,6 +124,10 @@ public class Character {
 	
 	public int getPlayTime(){
 		return playTime;
+	}
+	
+	public int getTeam(){
+		return team;
 	}
 	
 	public Ability getAbility(int index){
@@ -161,6 +183,10 @@ public class Character {
 	
 	public void decPlayTime(){
 		playTime--;
+	}
+	
+	public void setTeam(int team){
+		this.team = team;
 	}
 	
 	public void setAbilities(Ability[] ability){
@@ -246,11 +272,11 @@ public class Character {
 		setDefM(Integer.parseInt(defM[0]));
 		this.maxDefM = Integer.parseInt(defM[1]);
 		
-		String[] speed = reader.readLine().split("_");
-		setSpeed(Integer.parseInt(speed[0]));
-		this.maxSpeed = Integer.parseInt(speed[1]);
+		setSpeed(Integer.parseInt(reader.readLine()));
 		
 		playTime = Integer.parseInt(reader.readLine());
+		
+		team = Integer.parseInt(reader.readLine());
 		
 		String lastLine = reader.readLine();
 		if(lastLine != null) 
@@ -273,8 +299,9 @@ public class Character {
 		        				+ pa + "_" + maxPa + backSpace 
 		        				+ def + "_" + maxDef + backSpace 
 		        				+ defM + "_" + maxDefM  + backSpace 
-		        				+ speed + "_" + maxSpeed + backSpace
-		        				+ playTime + backSpace);
+		        				+ speed + backSpace
+		        				+ playTime + backSpace
+		        				+ team + backSpace);
 		        if( ability != null){
 		        	for (int i=0; i<ability.length; i++){
 		        		writer.write(ability[i].getCodex() + "_");
@@ -305,8 +332,9 @@ public class Character {
 	        				+ pa + "_" + maxPa + backSpace 
 	        				+ def + "_" + maxDef + backSpace 
 	        				+ defM + "_" + maxDefM  + backSpace 
-	        				+ speed + "_" + maxSpeed + backSpace
-	        				+ playTime + backSpace);
+	        				+ speed + backSpace
+	        				+ playTime + backSpace
+	        				+ team + backSpace);
 		        	if( ability != null){
 		        		for (int i=0; i<ability.length; i++){
 		        			writer.write(ability[i].getCodex() + "_");
@@ -330,7 +358,7 @@ public class Character {
 				+ ", pa : " + pa + "/" + maxPa
 				+ ", def : " + def + "/" + maxDef
 				+ ", defM : " + defM + "/" + maxDefM
-				+ ", speed : " + speed + "/" + maxSpeed;
+				+ ", speed : " + speed;
 	}
 	
 	public boolean equals(Object character){

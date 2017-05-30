@@ -18,6 +18,14 @@ public class HumanPlayer {
 		this.currentCharacter = playableCharacters.get(0);
 	}
 	
+	public Character getCurrentCharacter(){
+		return currentCharacter;
+	}
+	
+	public Character getPlayableCharacter(int index){
+		return playableCharacters.get(index);
+	}
+	
 	public void changeCharacter(Character character){
 		if (!characterPlayed){
 			if(playableCharacters.contains(character)) currentCharacter = character;
@@ -27,10 +35,12 @@ public class HumanPlayer {
 	
 	public void move(Square square){
 		currentCharacter.move(square);
+		characterPlayed = true;
 	}
 	
 	public void useAction(Ability ability, Square square){
 		currentCharacter.useAbility(ability, square);
+		characterPlayed = true;
 	}
 	
 	public void endTurn(){

@@ -17,8 +17,6 @@ public class Party {
 	private String name;
 	private Map map;
 	private ArrayList<Character> allCharacters = new ArrayList<Character>();
-	private ArrayList<Character> firstTeam = new ArrayList<Character>();
-	private ArrayList<Character> secondTeam = new ArrayList<Character>();
 	private ArrayList<Character> order = new ArrayList<Character>();
 	private Character lastCharacter;
 
@@ -27,6 +25,7 @@ public class Party {
 		File d = new File(directory);
 		d.mkdir();
 		setId(d.list().length+1);
+		this.name = "party " + id;
 	};
 	
 	public Party(String partyDirectory) throws InstantiationException, IllegalAccessException, ClassNotFoundException, IOException{
@@ -36,11 +35,12 @@ public class Party {
 		for(int i=1; i<directory.list().length-1; i++){
 			allCharacters.add(new Character(partyDirectory + "Character_"+i+".txt"));
 		}
-		ordered(allCharacters);
+		
 		BufferedReader reader = new BufferedReader(new FileReader(partyDirectory+"data.txt"));
 		setName(reader.readLine());
 		reader.close();
 		
+		initParty();
 	}
 	
 	
@@ -64,12 +64,8 @@ public class Party {
 		return allCharacters;
 	}
 	
-	public ArrayList<Character> getFirstTeam(){
-		return firstTeam;
-	}
-	
-	public ArrayList<Character> getSecondTeam(){
-		return secondTeam;
+	public Character getOrder(int index){
+		return order.get(index);
 	}
 	
 	public void setId(int id){
@@ -82,28 +78,30 @@ public class Party {
 	
 	
 	public boolean isFirstPlayerTurn(){
-		return firstTeam.contains(order.get(0));
+		return order.get(0).getTeam() == 1;
 	}
 	
-	public void ordered(ArrayList<Character> allCharacters){
-		order = allCharacters;
-		order.sort((Character o1, Character o2) -> o1.getSpeed()-o2.getSpeed());
-		lastCharacter = order.get(order.size()-1);
-	}
 	
 	public ArrayList<Character> firstCharacters(){
 		ArrayList<Character> playableCharacters = new ArrayList<Character>();
 		playableCharacters.add(order.get(0));
 		int index = 1;
-		while( index < order.size() && 
-				((firstTeam.contains(order.get(0)) && firstTeam.contains(order.get(index))) 
-				|| (secondTeam.contains(order.get(0)) && secondTeam.contains(order.get(index))))){
+		while( index < order.size() && (order.get(0).getTeam() == order.get(index).getTeam()) ){
 			playableCharacters.add(order.get(index));
 			index++;
 		}
 		return playableCharacters;
 	}
 	
+	public void initParty(){
+		order = new ArrayList<Character>();
+		for(int i=0; i<allCharacters.size();i++){
+			order.add(allCharacters.get(i));
+		}
+		order.sort((Character o1, Character o2) -> o1.getSpeed()-o2.getSpeed());
+		lastCharacter = order.get(order.size()-1);
+		
+	}
 	
 	public ArrayList<Character> nextCharacters(Character characterPlayed){
 		ArrayList<Character> playableCharacters = new ArrayList<Character>();
@@ -116,19 +114,20 @@ public class Party {
 		
 		playableCharacters.add(order.get(0));
 		int index = 1;
-		while( index < order.size() && 
-				((firstTeam.contains(order.get(0)) && firstTeam.contains(order.get(index))) 
-				|| (secondTeam.contains(order.get(0)) && secondTeam.contains(order.get(index))))){
+
+		while(index < order.size() && ((characterPlayed.getTeam() == order.get(index).getTeam()) ||
+				(characterPlayed.getSpeed()*characterPlayed.getPlayTime() >= order.get(index).getSpeed()*order.get(index).getPlayTime()))){
+			index++;
+		}
+		order.add(index,characterPlayed);
+		
+		index = 1;
+		while( index < order.size() && (order.get(0).getTeam() == order.get(index).getTeam()) ){
 			playableCharacters.add(order.get(index));
 			index++;
 		}
 		
-		index++;
-		while(index < order.size() &&
-				(characterPlayed.getSpeed()*characterPlayed.getPlayTime() >= order.get(index).getSpeed()*order.get(index).getPlayTime())){
-			index++;
-		}
-		order.add(index,characterPlayed);
+
 		
 		return playableCharacters;
 	}
@@ -142,6 +141,7 @@ public class Party {
 		Character c = new Character(characterFilename);
 		c.setId(allCharacters.size()+1);
 		allCharacters.add(c);
+		initParty();
 	}
 	
 	

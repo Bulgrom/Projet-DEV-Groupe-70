@@ -5,5 +5,7 @@ pers1
 6_6
 80_80
 30_30
-10_10
-Punch-50_BasicArrow-50-4_
+10
+1
+0
+ability.damageAbility.Punch-50_ability.damageAbility.BasicArrow-50-4_

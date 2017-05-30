@@ -13,10 +13,12 @@ public class PartyInterface {
 	
 	
 	public PartyInterface(Party party){
+		this.party = party;
 		currentPlayer = new HumanPlayer(this, party.firstCharacters());
 	}
 	
 	public PartyInterface(Party party, boolean firstPlayerisAI, boolean secondPlayerisAI ){
+		this.party = party;
 		this.firstPlayerisAI = firstPlayerisAI;
 		this.secondPlayerisAI = secondPlayerisAI;
 		if(party.isFirstPlayerTurn()){
@@ -29,6 +31,9 @@ public class PartyInterface {
 		}
 	}
 	
+	public Party getParty(){
+		return party;
+	}
 	
 	public HumanPlayer getCurrentPlayer(){
 		return currentPlayer;
