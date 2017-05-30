@@ -27,6 +27,7 @@ public class Character {
 	private int maxDef;
 	private int maxDefM;
 	private int maxSpeed;
+	private int playTime = 0;
 	
 	public Character(String filename) throws IOException, InstantiationException, IllegalAccessException, ClassNotFoundException{
 	    readPlayer(new File(filename));
@@ -103,17 +104,20 @@ public class Character {
 		return position;
 	}
 	
+	public int getPlayTime(){
+		return playTime;
+	}
+	
 	public Ability getAbility(int index){
 		return ability[index];
 	}
 	
-	
 	public int getAbilityLength() {
-		if (ability == null) {
+ 		if (ability == null) {
 			return 0;
-		}
-		else return ability.length;
-	
+ 		}
+ 		else return ability.length;
+	}
 	
 	public void setName(String name){
 		this.name = name;
@@ -151,6 +155,13 @@ public class Character {
 		this.position = position;
 	}
 	
+	public void incPlayTime(){
+		playTime++;
+	}
+	
+	public void decPlayTime(){
+		playTime--;
+	}
 	
 	public void setAbilities(Ability[] ability){
 		this.ability = new Ability[ability.length];
@@ -163,7 +174,7 @@ public class Character {
 		ability = new Ability[stringAbility.length];
 		for(int i=0; i<stringAbility.length; i++){
 			String[] parameters = stringAbility[i].split("-");
-			this.ability[i] = (Ability) Class.forName("ability."+parameters[0]).newInstance();
+			this.ability[i] = (Ability) Class.forName(parameters[0]).newInstance();
 			this.ability[i].setParameters(Arrays.copyOfRange(parameters, 1, parameters.length));
 		}
 	}
@@ -193,6 +204,24 @@ public class Character {
 		return true;
 	}
 		
+	
+	
+	public void resetAction(){
+		pa += Math.floorDiv(maxPa*2,3);
+		if(pa > maxPa) pa = maxPa;
+		
+	}
+	
+	public void resetMovement(){
+		pm += Math.floorDiv(maxPm*2, 3);
+		if(pm > maxPm) pm = maxPm;
+	}
+	
+
+	
+	
+	
+	
 	public void readPlayer(File root) throws IOException, InstantiationException, IllegalAccessException, ClassNotFoundException{
 		BufferedReader reader = new BufferedReader(new FileReader(root));
 		setName(reader.readLine());
@@ -221,6 +250,8 @@ public class Character {
 		setSpeed(Integer.parseInt(speed[0]));
 		this.maxSpeed = Integer.parseInt(speed[1]);
 		
+		playTime = Integer.parseInt(reader.readLine());
+		
 		String lastLine = reader.readLine();
 		if(lastLine != null) 
 			setStringAbilities(lastLine.split("_"));
@@ -242,7 +273,8 @@ public class Character {
 		        				+ pa + "_" + maxPa + backSpace 
 		        				+ def + "_" + maxDef + backSpace 
 		        				+ defM + "_" + maxDefM  + backSpace 
-		        				+ speed + "_" + maxSpeed + backSpace);
+		        				+ speed + "_" + maxSpeed + backSpace
+		        				+ playTime + backSpace);
 		        if( ability != null){
 		        	for (int i=0; i<ability.length; i++){
 		        		writer.write(ability[i].getCodex() + "_");
@@ -273,7 +305,8 @@ public class Character {
 	        				+ pa + "_" + maxPa + backSpace 
 	        				+ def + "_" + maxDef + backSpace 
 	        				+ defM + "_" + maxDefM  + backSpace 
-	        				+ speed + "_" + maxSpeed + backSpace);
+	        				+ speed + "_" + maxSpeed + backSpace
+	        				+ playTime + backSpace);
 		        	if( ability != null){
 		        		for (int i=0; i<ability.length; i++){
 		        			writer.write(ability[i].getCodex() + "_");
@@ -291,13 +324,13 @@ public class Character {
 	
 	public String toString(){
 		return "name : " + name
-				+ " id : " + id 
-				+ " pv : " + pv + "/" + maxPv 
-				+ " pm : " + pm + "/" + maxPm
-				+ " pa : " + pa + "/" + maxPa
-				+ " def : " + def + "/" + maxDef
-				+ " defM : " + defM + "/" + maxDefM
-				+ " speed : " + speed + "/" + maxSpeed;
+				+ ", id : " + id 
+				+ ", pv : " + pv + "/" + maxPv 
+				+ ", pm : " + pm + "/" + maxPm
+				+ ", pa : " + pa + "/" + maxPa
+				+ ", def : " + def + "/" + maxDef
+				+ ", defM : " + defM + "/" + maxDefM
+				+ ", speed : " + speed + "/" + maxSpeed;
 	}
 	
 	public boolean equals(Object character){

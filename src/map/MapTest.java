@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 
 import java.io.IOException;
 import ability.*;
+import ability.damageAbility.*;
+
 
 import org.junit.Before;
 import org.junit.Test;
