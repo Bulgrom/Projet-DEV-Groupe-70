@@ -2,9 +2,13 @@ package map;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.LinkedList;
 import java.io.File;
 import java.io.BufferedReader;
 import java.io.FileReader;
+import element.Element;
+import ability.trap.Trap;
+
 
 public class Map {
 	private static String backSpace = System.lineSeparator();
@@ -30,7 +34,7 @@ public class Map {
 		for(int i=0; i<height; i++){
 			for(int j=0; j<length; j++){
 				map[i][j] = new Square(i, j, this);
-				map[i][j].setBackground(new Background(1));
+				map[i][j].setBackground(Background.GRASS);
 			}
 		}
 	}
@@ -98,18 +102,40 @@ public class Map {
 			new File(directory).mkdirs();
 	    	File file = new File(directory + "Map.txt");
 	        file .createNewFile();
+	        (new File(directory + "Element.txt")).createNewFile();
+	        (new File(directory + "Trap.txt")).createNewFile();
 	        final FileWriter writer = new FileWriter(file);
+	        
+	        LinkedList<Element> elementList = new LinkedList<Element>();
+	        LinkedList<Trap> trapList = new LinkedList<Trap>();
+	        
+	        final FileWriter elementWriter = new FileWriter(new File(directory + "Element.txt"));
+	        final FileWriter trapWriter = new FileWriter(new File(directory + "Trap.txt"));
 	        try {
 	        	writer.write(name + backSpace + dim[0] + "x" + dim[1] + backSpace);
 	        	for (int i=0; i < dim[0]; i++){
 	        		for (int j=0; j < dim[1]; j++){
 	        			writer.write(getSquare(i, j) + "_");
+	        			if((getSquare(i,j).getElement() != null) && !(elementList.contains(getSquare(i,j).getElement()))) 
+	        					elementList.add(getSquare(i,j).getElement());
+	        			if((getSquare(i,j).getTrap() != null) && !(trapList.contains(getSquare(i,j).getTrap()))) 
+        						trapList.add(getSquare(i,j).getTrap());
 	        		}
 	        		writer.write(backSpace);
+	        	}
+	        	
+	        	for(int i=0; i<elementList.size();i++){
+	        		elementWriter.write(elementList.get(i).getCodex() + backSpace);
+	        	}
+	        	
+	        	for(int i=0; i<trapList.size(); i++){
+	        		trapWriter.write(trapList.get(i).getCodex() + backSpace);
 	        	}
 	        }
 	        finally {
 	            writer.close();
+	            elementWriter.close();
+	            trapWriter.close();
 	        }
 	    }
 	    catch (Exception e) {

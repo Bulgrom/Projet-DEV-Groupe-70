@@ -83,8 +83,8 @@ public class MapTest {
 		m.getSquare(3, 2).setCharacter(pers2);
 		m.getSquare(3, 4).setCharacter(pers2);
 		m.getSquare(1, 4).setCharacter(pers1);
-		m.getSquare(2, 3).setElement(new Element(1, false, false));
-		m.getSquare(2, 4).setElement(new Element(2));
+		m.getSquare(2, 3).setElement((Element) new Wall());
+		m.getSquare(2, 4).setElement(new SmallRock());
 		
 		System.out.println(m);
 		System.out.println("");
@@ -127,10 +127,13 @@ public class MapTest {
 	public void testSaveMap() throws InstantiationException, IllegalAccessException, ClassNotFoundException, IOException{
 		System.out.println("TestSaveMap");
 		
-		m.getSquare(0,1).setBackground(new Background(2));
-		m.getSquare(0, 2).setElement(new Element(1));
-		m.getSquare(1,0).setBackground(new Background(0));
-		m.getSquare(1,0).setElement(new Element(2));
+		m.getSquare(0,1).setBackground(Background.SAND);
+		m.getSquare(0, 2).setElement(new Wall());
+		m.getSquare(0, 2).getElement().setId(1);
+		
+		m.getSquare(1,0).setBackground(Background.WATER);
+		m.getSquare(1,0).setElement(new SmallRock());
+		m.getSquare(1,0).getElement().setId(2);
 		System.out.println(m);
 		
 		m.saveMap("mapSave/Test/");

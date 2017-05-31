@@ -1,6 +1,6 @@
 Test
 4x5
-1b_2b_1b1e_1b_1b_
-0b2e_1b_1b_1b_1b_
+1b_3b_1b1e_1b_1b_
+2b2e_1b_1b_1b_1b_
 1b_1b_1b_1b_1b_
 1b_1b_1b_1b_1b_

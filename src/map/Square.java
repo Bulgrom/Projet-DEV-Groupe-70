@@ -1,5 +1,8 @@
 package map ;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import ability.trap.*;
 import element.Element;
@@ -23,7 +26,7 @@ public class Square {
 		setCoord(i,j);
 		setMap(map);
 		String[] separator = codex.split("b");
-		setBackground(new Background(Integer.parseInt(separator[0])));
+		setBackground(getBackgroundById(Integer.parseInt(separator[0])));
 		if (separator.length == 2){
 			separator[0] = separator[1];
 		
@@ -35,13 +38,13 @@ public class Square {
 		
 			if (separator[0].contains("e")){
 				separator = separator[0].split("e");
-				setElement(new Element(Integer.parseInt(separator[0])));
+				setElement(directory, Integer.parseInt(separator[0]));
 				if (separator.length == 2) separator[0] = separator[1];
 			}
 			
 			if (separator[0].contains("t")){
 				separator = separator[0].split("t");
-				setTrap(new Trap(directory, Integer.parseInt(separator[0])));
+				setTrap(directory, Integer.parseInt(separator[0]));
 				if (separator.length == 2) separator[0] = separator[1];
 			}
 		
@@ -55,6 +58,14 @@ public class Square {
 
 	public Background getBackground(){
 		return background;
+	}
+	
+	public Background getBackgroundById(int id){
+		for(Background b : Background.values()){
+			if(b.getId() == id) return b;
+		}
+		System.out.println("Id not found");
+		return Background.EMPTY;
 	}
 	
 	public int getHeight(){
@@ -93,6 +104,27 @@ public class Square {
 		this.elem = elem;
 	}
 	
+	public void setElement(String directory, int id) throws IOException{
+		BufferedReader reader = new BufferedReader(new FileReader(new File(directory + "Element.txt")));
+		
+		String line;
+		try {
+			line = reader.readLine();
+			while (line != null){
+				if(Integer.parseInt(line.split("_")[0]) == id) setElement((Element) Class.forName(line.split("_")[1]).newInstance());
+				line = reader.readLine();
+			}
+			getElement().setId(id);
+		} catch (IOException | InstantiationException | IllegalAccessException | ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally{
+			reader.close();
+		}
+
+
+	}
+	
 	public void setCharacter(Character pers){
 		if(pers != null){
 			pers.setPosition(this);
@@ -103,6 +135,25 @@ public class Square {
 	
 	public void setTrap(Trap trap){
 		this.trap = trap;
+	}
+	
+	public void setTrap(String directory, int id) throws IOException{
+		BufferedReader reader = new BufferedReader(new FileReader(new File(directory + "Trap.txt")));
+		
+		String line;
+		try {
+			line = reader.readLine();
+			while (line != null){
+				if(Integer.parseInt(line.split("_")[0]) == id) setTrap((Trap) Class.forName(line.split("_")[1]).newInstance());
+				line = reader.readLine();
+			}
+			getTrap().setId(id);
+		} catch (IOException | InstantiationException | IllegalAccessException | ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally{
+			reader.close();
+		}
 	}
 	
 	public void setCoord(int i, int j){

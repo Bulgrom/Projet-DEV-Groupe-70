@@ -9,12 +9,9 @@ public class Element {
 	private boolean allowView = true;
 	private boolean allowWalk = true;
 	
-	public Element(int id){
-		this.id = id;
-	}
+	public Element(){}
 	
-	public Element(int id, boolean allowWalk, boolean hideView){
-		this.id = id;
+	public Element( boolean allowWalk, boolean hideView){
 		this.allowWalk = allowWalk;
 		this.allowView = hideView;
 	}
@@ -24,42 +21,40 @@ public class Element {
 	}
 
 	public String getName(){
-	return name;
-}
+		return name;
+	}
 
 	public String getSpriteLoc(){
-	return spriteLoc;
-}
+		return spriteLoc;
+	}
 
+	public String getCodex(){
+		return id + "_element." + name;
+	}
+	
+	
 	public boolean allowView(){
-	return allowView;
-}
+		return allowView;
+	}
 
 	public boolean isWalkable(){
-	return allowWalk;
-}
+		return allowWalk;
+	}
 
 
 	public void setId(int id){
 		this.id = id;
 	}
-
+	
 	public void setName(String name){
 		this.name = name;
 	}
-	
-	public void setSpriteLoc(String spriteLoc){
-		this.spriteLoc = spriteLoc;
-	}
 
-	public void setView(boolean hideView){
-		this.allowView = hideView;
+	public boolean equals(Object element){
+		if(!(element instanceof Element)) return false;
+		
+		Element e = (Element) element;
+		return this.id == e.id;
 	}
-	
-	public void setWalkable(boolean allowWalk){
-		this.allowWalk = allowWalk;
-	}
-
-	
 	
 }

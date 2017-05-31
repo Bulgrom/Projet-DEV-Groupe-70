@@ -1,17 +1,23 @@
 package map;
+import java.awt.Color;
 
-public class Background {
+public enum Background {
 
-	private static boolean useSprite;
+	GRASS (1, "grass", Color.GREEN),
+	WATER (2, "water", Color.BLUE),
+	SAND  (3, "sand", Color.YELLOW),
+	EMPTY (0, "empty", Color.BLACK);
+	
 	private int id;
 	private String name;
-	private String color;
+	private Color color;
 	
-	
-	public Background(int id){
+	Background(int id, String name, Color color){
 		this.id = id;
+		this.name = name;
+		this.color = color;
 	}
-	
+
 	public int getId(){
 		return id;
 	}
@@ -20,24 +26,8 @@ public class Background {
 		return name;
 	}
 
-	public String getColor(){
+	public Color getColor(){
 		return color;
-	}
-
-	public boolean getUseSprite(){
-		return useSprite;
-	}
-
-	public void setId(int id){
-		this.id = id;
-	}
-	
-	public void setName(String name){
-		this.name = name;
-	}
-	
-	public void setColor(String color){
-		this.color = color;
 	}
 
 }
