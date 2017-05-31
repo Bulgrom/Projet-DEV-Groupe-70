@@ -1,26 +1,23 @@
 package ability.damageAbility;
 import map.Square;
 import map.Character;
-import map.Map;
-import element.Element;
 import ability.Ability;
 
 
 public class Punch extends Ability {
 
 	private int damage;
-	private String name = "Punch";
-	private int radius = 1;
 	//private String description;
 	
-	public Punch(){}
-	
-	public Punch(int damage){
-		this.damage = damage;
+	public Punch(){
+		super("Punch");
+		setRadius(1);
 	}
 	
-	public String getName(){
-		return name;
+	public Punch(int damage){
+		super("Punch");
+		this.damage = damage;
+		setRadius(1);
 	}
 	
 	public String getCodex(){
@@ -42,32 +39,9 @@ public class Punch extends Ability {
 		
 			Character p = aim.getCharacter();
 			if (p != null){
-				p.setPV(p.getPV()-damage);
+				physicalDamage(p, damage);
 			}
 		}
 	}
-	
-	
-	public boolean range(Square userLocation, Square aim){
-		Map map = userLocation.getMap();
 		
-		if(Math.abs(userLocation.getCoord()[0] - aim.getCoord()[0]) 
-				+ Math.abs(userLocation.getCoord()[1] - aim.getCoord()[1]) > radius) return false;
-
-		float[] vertex = new float[2];
-		vertex[0] = aim.getCoord()[0] - userLocation.getCoord()[0];
-		vertex[1] = aim.getCoord()[1] - userLocation.getCoord()[1];
-		for(int k=0; k< radius*10;k++){
-			Element elem = map.getSquare(Math.round((float)k/(radius*10)*vertex[0] + userLocation.getCoord()[0]),
-					Math.round((float)k/(radius*10)*vertex[1] + userLocation.getCoord()[1])).getElement();
-			if((elem != null) && (!elem.allowView()))	return false;
-		}
-
-		return true;
-	}
-	
-	
-	
-	
-	
 }

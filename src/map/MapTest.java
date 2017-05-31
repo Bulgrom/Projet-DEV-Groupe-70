@@ -25,8 +25,8 @@ public class MapTest {
 		m.setName("Test");
 		System.out.println(m);
 		
-		pers1 = new Character("pers1", 1, 1000, 3, 6, 80, 30, 10);
-		pers2 = new Character("pers2", 2, 1000, 5, 6, 50, 100, 20);
+		pers1 = new Character("pers1", 1, 1000, 3, 6, 20, 30, 10);
+		pers2 = new Character("pers2", 2, 1000, 5, 6, 0, 100, 20);
 		System.out.println(pers1);
 		System.out.println(pers2);
 		
@@ -83,7 +83,7 @@ public class MapTest {
 		m.getSquare(3, 2).setCharacter(pers2);
 		m.getSquare(3, 4).setCharacter(pers2);
 		m.getSquare(1, 4).setCharacter(pers1);
-		m.getSquare(2, 3).setElement((Element) new Wall());
+		m.getSquare(2, 3).setElement(new Wall());
 		m.getSquare(2, 4).setElement(new SmallRock());
 		
 		System.out.println(m);
@@ -162,6 +162,8 @@ public class MapTest {
 		pers2.saveCharacterWithName("characterSave/");
 		System.out.println("pers2 sauvegarde avec nom");
 		
+		
+		pers2.setStatus(Status.DEAD);
 		pers2.saveCharacterWithId("characterSave/");
 		System.out.println("pers2 sauvegarde avec Id");
 		

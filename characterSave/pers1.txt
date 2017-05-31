@@ -3,9 +3,10 @@ pers1
 1000_1000
 3_3
 6_6
-80_80
+20_20
 30_30
 10
 1
 0
+HEALTHY
 ability.damageAbility.Punch-50_ability.damageAbility.BasicArrow-50-4_

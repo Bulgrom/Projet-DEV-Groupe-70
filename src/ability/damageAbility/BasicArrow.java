@@ -1,38 +1,28 @@
 package ability.damageAbility;
 
 import map.Character;
-import element.Element;
-import map.Map;
 import map.Square;
 import ability.Ability;
 
 public class BasicArrow extends Ability{
 	private int damage;
-	private String name = "Punch";
-	private int radius = 5;
-	//private String description;
 	
-	public BasicArrow(){}
-	
-	public BasicArrow(int damage, int radius){
-		this.damage = damage;
-		this.radius = radius;
+	public BasicArrow(){
+		super("BasicArrow");
 	}
 	
-	public String getName(){
-		return name;
+	public BasicArrow(int damage, int radius){
+		super("BasicArrow");
+		this.damage = damage;
+		setRadius(radius);
 	}
 	
 	public String getCodex(){
-		return "ability.damageAbility.BasicArrow" + "-" + damage + "-" + radius; 
+		return "ability.damageAbility.BasicArrow" + "-" + damage + "-" + getRadius(); 
 	}
 	
 	public void setDamage(int dmg){
 		this.damage = dmg;
-	}
-	
-	public void setRadius(int radius){
-		this.radius = radius;
 	}
 	
 	public void setParameters(String[] parameters){
@@ -44,31 +34,9 @@ public class BasicArrow extends Ability{
 	
 	public void use(Square userLocation, Square aim){
 		if(range(userLocation, aim)){
-		
 			Character p = aim.getCharacter();
-			if (p != null){
-				p.setPV(p.getPV()-damage);
-			}
+			if (p != null) physicalDamage(p, damage);
 		}
-	}
-	
-	
-	public boolean range(Square userLocation, Square aim){
-		Map map = userLocation.getMap();
-		
-		if(Math.abs(userLocation.getCoord()[0] - aim.getCoord()[0]) 
-				+ Math.abs(userLocation.getCoord()[1] - aim.getCoord()[1]) > radius) return false;
-
-		float[] vertex = new float[2];
-		vertex[0] = aim.getCoord()[0] - userLocation.getCoord()[0];
-		vertex[1] = aim.getCoord()[1] - userLocation.getCoord()[1];
-		for(int k=0; k< radius*10;k++){
-			Element elem = map.getSquare(Math.round((float)k/(radius*10)*vertex[0] + userLocation.getCoord()[0]),
-					Math.round((float)k/(radius*10)*vertex[1] + userLocation.getCoord()[1])).getElement();
-			if((elem != null) && (!elem.allowView()))	return false;
-		}
-
-		return true;
 	}
 	
 }

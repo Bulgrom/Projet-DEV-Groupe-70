@@ -3,6 +3,7 @@ import party.*;
 import java.util.ArrayList;
 import map.Character;
 import map.Square;
+import map.Status;
 import ability.Ability;
 
 public class HumanPlayer {
@@ -36,10 +37,15 @@ public class HumanPlayer {
 	public void move(Square square){
 		currentCharacter.move(square);
 		characterPlayed = true;
+		if(currentCharacter.isDead()){
+			partyInterface.getParty().getOrder().remove(currentCharacter);
+			endTurn();
+		}
 	}
 	
 	public void useAction(Ability ability, Square square){
 		currentCharacter.useAbility(ability, square);
+		if(square.getCharacter().getStatus() == Status.DEAD) partyInterface.getParty().getOrder().remove(square.getCharacter());
 		characterPlayed = true;
 	}
 	
@@ -47,6 +53,7 @@ public class HumanPlayer {
 		currentCharacter.incPlayTime();
 		currentCharacter.resetMovement();
 		currentCharacter.resetAction();
+		currentCharacter.resetPv();
 		partyInterface.endTurn(currentCharacter);
 	}
 	

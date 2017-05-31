@@ -1,13 +1,17 @@
 package ability.trap;
 
 import map.Square;
+import map.Character;
 
-public class Trap extends ability.Ability {
+public abstract class Trap extends ability.Ability {
 	
-	private String name;
 	private int id;
 	
 	public Trap(){}
+	
+	public Trap(String name){
+		super(name);
+	}
 	
 	public boolean equals(Object trap){
 		if(!(trap instanceof Trap)) return false;
@@ -18,35 +22,23 @@ public class Trap extends ability.Ability {
 	}
 
 	public String getCodex(){
-		return id + "_" + "ability.trap." + name;
+		return id + "_" + "ability.trap." + getName();
 	}
 
-	@Override
+
 	public void use(Square userLoc, Square aim) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
+		if(range(userLoc, aim)){
+			Trap t = aim.getTrap();
+			if (t != null) aim.setTrap(this);
+		}
 	}
 
 	public void setId(int id){
 		this.id = id;
 	}
 	
-	@Override
-	public void setParameters(String[] parameters) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public boolean range(Square userLoc, Square aim) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+	public abstract void activation(Character character);
+	
+	public abstract void setParameters(String[] parameters);
 
 }

@@ -50,6 +50,10 @@ public class Element {
 		this.name = name;
 	}
 
+	public void setSpriteLoc(String spriteLoc){
+		this.spriteLoc = spriteLoc;
+	}
+	
 	public boolean equals(Object element){
 		if(!(element instanceof Element)) return false;
 		

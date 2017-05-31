@@ -28,6 +28,7 @@ public class Character {
 	private int maxDefM;
 	private int playTime = 1;
 	private int team = 0;
+	private Status status = Status.HEALTHY;
 	
 	public Character(String filename) throws IOException, InstantiationException, IllegalAccessException, ClassNotFoundException{
 	    readPlayer(new File(filename));
@@ -130,6 +131,10 @@ public class Character {
 		return team;
 	}
 	
+	public Status getStatus(){
+		return status;
+	}
+	
 	public Ability getAbility(int index){
 		return ability[index];
 	}
@@ -139,6 +144,13 @@ public class Character {
 			return 0;
  		}
  		else return ability.length;
+	}
+	
+	public Status getStatusByName(String name){
+		for(Status s: Status.values()){
+			if(s.toString() == name) return s;
+		}
+		return Status.HEALTHY;
 	}
 	
 	public void setName(String name){
@@ -189,6 +201,10 @@ public class Character {
 		this.team = team;
 	}
 	
+	public void setStatus(Status status){
+		this.status = status;
+	}
+	
 	public void setAbilities(Ability[] ability){
 		this.ability = new Ability[ability.length];
 		for (int i=0; i<ability.length;i++){
@@ -233,19 +249,35 @@ public class Character {
 	
 	
 	public void resetAction(){
-		pa += Math.floorDiv(maxPa*2,3);
+		if(status == Status.PARALYSED){
+			pa += Math.floorDiv(maxPa, 3);
+		}else{
+			pa += Math.floorDiv(maxPa*2,3);
+		}
 		if(pa > maxPa) pa = maxPa;
-		
 	}
 	
 	public void resetMovement(){
-		pm += Math.floorDiv(maxPm*2, 3);
+		if(status == Status.INERT){
+			pm += Math.floorDiv(maxPm, 3);
+		}else{
+			pm += Math.floorDiv(maxPm*2, 3);
+		}
 		if(pm > maxPm) pm = maxPm;
 	}
 	
-
+	public void resetPv(){
+		if(status == Status.BURNED) pv -= Math.floorDiv(maxPv, 10);
+		checkDeath();
+	}
 	
+	public void checkDeath(){
+		if(pv <= 0) status = Status.DEAD;
+	}
 	
+	public boolean isDead(){
+		return status == Status.DEAD;
+	}
 	
 	
 	public void readPlayer(File root) throws IOException, InstantiationException, IllegalAccessException, ClassNotFoundException{
@@ -278,6 +310,8 @@ public class Character {
 		
 		team = Integer.parseInt(reader.readLine());
 		
+		status = getStatusByName(reader.readLine());
+				
 		String lastLine = reader.readLine();
 		if(lastLine != null) 
 			setStringAbilities(lastLine.split("_"));
@@ -301,7 +335,8 @@ public class Character {
 		        				+ defM + "_" + maxDefM  + backSpace 
 		        				+ speed + backSpace
 		        				+ playTime + backSpace
-		        				+ team + backSpace);
+		        				+ team + backSpace
+		        				+ status + backSpace);
 		        if( ability != null){
 		        	for (int i=0; i<ability.length; i++){
 		        		writer.write(ability[i].getCodex() + "_");
@@ -334,7 +369,8 @@ public class Character {
 	        				+ defM + "_" + maxDefM  + backSpace 
 	        				+ speed + backSpace
 	        				+ playTime + backSpace
-	        				+ team + backSpace);
+	        				+ team + backSpace
+	        				+ status + backSpace);
 		        	if( ability != null){
 		        		for (int i=0; i<ability.length; i++){
 		        			writer.write(ability[i].getCodex() + "_");
@@ -358,7 +394,8 @@ public class Character {
 				+ ", pa : " + pa + "/" + maxPa
 				+ ", def : " + def + "/" + maxDef
 				+ ", defM : " + defM + "/" + maxDefM
-				+ ", speed : " + speed;
+				+ ", speed : " + speed
+				+", status :" + status;
 	}
 	
 	public boolean equals(Object character){

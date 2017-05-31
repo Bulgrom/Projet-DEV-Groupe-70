@@ -68,6 +68,10 @@ public class Party {
 		return order.get(index);
 	}
 	
+	public ArrayList<Character> getOrder(){
+		return order;
+	}
+	
 	public void setId(int id){
 		this.id = id;
 	}
@@ -126,8 +130,6 @@ public class Party {
 			playableCharacters.add(order.get(index));
 			index++;
 		}
-		
-
 		
 		return playableCharacters;
 	}
