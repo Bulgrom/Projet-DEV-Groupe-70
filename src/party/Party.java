@@ -32,7 +32,7 @@ public class Party {
 		(new File("saveParty/")).mkdir();
 		map = new Map(partyDirectory);
 		File directory = new File(partyDirectory);
-		for(int i=1; i<directory.list().length-1; i++){
+		for(int i=1; i<directory.list().length-4; i++){
 			allCharacters.add(new Character(partyDirectory + "Character_"+i+".txt"));
 		}
 		
