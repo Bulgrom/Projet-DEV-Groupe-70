@@ -1,0 +1,11 @@
+pers1
+1
+1000_1000
+3_3
+6_6
+80_80
+30_30
+10
+1
+0
+ability.damageAbility.Punch-50_ability.damageAbility.BasicArrow-50-4_
