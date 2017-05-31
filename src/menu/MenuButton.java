@@ -6,30 +6,18 @@ import java.awt.FontFormatException;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Dimension;
-import java.awt.Graphics2D;
 import java.awt.GraphicsEnvironment;
 import java.awt.Image;
 import java.awt.Rectangle;
-import java.awt.Toolkit;
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
-import java.util.Iterator;
 
-import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.imageio.ImageIO;
-import javax.imageio.ImageReader;
-import javax.imageio.stream.FileImageInputStream;
-import javax.imageio.stream.ImageInputStream;
-import javax.swing.JPanel;
-import javax.swing.border.Border;
 
-import java.awt.Point;
-import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+
 
 public class MenuButton extends JButton implements MouseListener {
 	
@@ -94,7 +82,6 @@ public class MenuButton extends JButton implements MouseListener {
 		}
 	}
 
-
 	public void mouseExited(MouseEvent event) { 
 		color = Color.getHSBColor((float)0.14, 1, 1);
 		try {
@@ -104,7 +91,6 @@ public class MenuButton extends JButton implements MouseListener {
 			e.printStackTrace();
 		}
 	}
-
 	
 	public void mousePressed(MouseEvent event) { 
 		color = Color.blue;
@@ -116,7 +102,6 @@ public class MenuButton extends JButton implements MouseListener {
 		}
 	}
 
-	
 	public void mouseReleased(MouseEvent event) { 
 		  if((event.getY() > 0 && event.getY() < this.getHeight()) && (event.getX() > 0 && event.getX() < this.getWidth())){
 			  color = Color.getHSBColor((float)0.14, 1, 1);
@@ -127,8 +112,6 @@ public class MenuButton extends JButton implements MouseListener {
 			  }
 		  }
 	}       
-
-	
 	
 	//method from Internet, with small changes to correspond to the font imported
 	public void drawCenteredString(Graphics g, String text, Rectangle rect, Font font) {

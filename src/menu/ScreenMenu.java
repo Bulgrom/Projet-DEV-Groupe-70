@@ -1,18 +1,12 @@
 package menu;
 
-import java.awt.BorderLayout;
-import java.awt.CardLayout;
 import java.awt.Color;
-import java.awt.Component;
-import java.awt.Container;
 import java.awt.Dimension;
-import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.JButton;
 import javax.swing.JPanel;
 
 public class ScreenMenu extends JPanel{
@@ -57,7 +51,6 @@ public class ScreenMenu extends JPanel{
 		screen.add(centerMenu);
 		screen.add(Box.createHorizontalGlue());
 		
-		
 	}
 	
 	private static ScreenMenu screenMenu = new ScreenMenu();
@@ -83,7 +76,6 @@ public class ScreenMenu extends JPanel{
 
 	class Options implements ActionListener {
 		public void actionPerformed(ActionEvent arg0){
-			System.out.print("Options");
 			ComingSoon tmp_screen = new ComingSoon();
 		}
 	}

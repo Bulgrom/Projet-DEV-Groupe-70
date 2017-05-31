@@ -1,6 +1,5 @@
 package menu;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Dimension;
 import java.awt.Image;
@@ -8,17 +7,11 @@ import java.awt.Toolkit;
 import java.io.File;
 import java.io.IOException;
 import java.util.Iterator;
-
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.imageio.ImageIO;
 import javax.imageio.ImageReader;
 import javax.imageio.stream.FileImageInputStream;
 import javax.imageio.stream.ImageInputStream;
 import javax.swing.JPanel;
-
-import java.awt.Point;
-import java.awt.Color;
  
 public class Background extends JPanel {
 	
@@ -27,11 +20,11 @@ public class Background extends JPanel {
 	int perfectWidth;
 	String name;
 
-	
 	public Background(String name){
 		super();
 		this.name = name;
 	}
+	
 	public void paintComponent(Graphics g){
 		int currentWidth = this.getWidth();
 		int currentHeight = this.getHeight();
@@ -50,9 +43,6 @@ public class Background extends JPanel {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
-		
-
 	}               
 	
 	private void perfectImageSize(int heigth, int width){
@@ -94,7 +84,7 @@ public class Background extends JPanel {
 	      reader.dispose();
 	    }
 	  }
-
+	  
 	  throw new IOException("Not a known image file: " + imgFile.getAbsolutePath());
 	}
 }

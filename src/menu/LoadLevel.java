@@ -1,16 +1,12 @@
 package menu;
 
-import java.awt.BorderLayout;
-import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -25,7 +21,7 @@ public class LoadLevel extends JPanel {
 		levels.setForeground(Color.red);
 		levels.setFont(MenuButton.newFont.deriveFont((float) 55));
 		
-		JComboBox levelSelection = new JComboBox();
+		JComboBox<String> levelSelection = new JComboBox<String>();
 		levelSelection.setMaximumSize(new Dimension(660,40));
 		
 		MenuButton load = new MenuButton("Load",Color.getHSBColor((float)0.14, 1, 1));
