@@ -21,6 +21,11 @@ public class LoadLevel extends JPanel {
 		levels.setForeground(Color.red);
 		levels.setFont(MenuButton.newFont.deriveFont((float) 55));
 		
+		JPanel name = new JPanel();
+		name.setMaximumSize(new Dimension(500,60));
+		name.add(levels);
+		name.setOpaque(false);
+		
 		JComboBox<String> levelSelection = new JComboBox<String>();
 		levelSelection.setMaximumSize(new Dimension(660,40));
 		
@@ -44,7 +49,7 @@ public class LoadLevel extends JPanel {
 		
 		JPanel levelContent = new JPanel();
 		levelContent.setLayout(new BoxLayout(levelContent,BoxLayout.PAGE_AXIS));
-		levelContent.add(levels);
+		levelContent.add(name);
 		levelContent.add(Box.createRigidArea(new Dimension(0,20)));
 		levelContent.add(levelSelection);
 		levelContent.add(Box.createRigidArea(new Dimension(0,10)));
