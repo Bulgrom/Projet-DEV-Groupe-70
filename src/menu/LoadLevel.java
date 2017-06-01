@@ -155,7 +155,7 @@ public class LoadLevel extends JPanel {
 		infos4.add(infoDateDisplayed);
 		infos4.setOpaque(false);
 
-		infos.add(Box.createRigidArea(new Dimension(0,10)));
+		infos.add(Box.createRigidArea(new Dimension(0,15)));
 		infos.add(infos1);
 		infos.add(infos2);
 		infos.add(infos3);
@@ -168,7 +168,9 @@ public class LoadLevel extends JPanel {
 		levelContent.add(levelSelection);
 		levelContent.add(Box.createRigidArea(new Dimension(0,10)));
 		levelContent.add(infos);
+		
 		levelContent.add(buttons);
+		levelContent.add(Box.createRigidArea(new Dimension(0,20)));
 
 		levelContent.setPreferredSize(new Dimension(540,400));
 		levelContent.setOpaque(false);
