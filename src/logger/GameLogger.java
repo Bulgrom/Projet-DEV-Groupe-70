@@ -1,4 +1,4 @@
-package fr.game;
+package logger;
 import java.util.logging.*;
 import java.io.IOException;
 
