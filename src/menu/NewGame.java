@@ -16,8 +16,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
-import menu.LoadLevel.LevelSelection;
-
 public class NewGame extends JPanel {
 	
 	static MenuBackground newGame;
