@@ -11,7 +11,7 @@ import ability.*;
 
 public class Character {
 	private static String backSpace = System.lineSeparator();
-	public String name;
+	private String name;
 	private int id;
 	private int pv;
 	private int pm;
@@ -29,6 +29,7 @@ public class Character {
 	private int playTime = 1;
 	private int team = 0;
 	private Status status = Status.HEALTHY;
+	private String spriteLoc;
 	
 	public Character(String filename) throws IOException, InstantiationException, IllegalAccessException, ClassNotFoundException{
 	    readPlayer(new File(filename));
@@ -135,6 +136,10 @@ public class Character {
 		return status;
 	}
 	
+	public String getSpriteLoc(){
+		return spriteLoc;
+	}
+	
 	public Ability getAbility(int index){
 		return ability[index];
 	}
@@ -203,6 +208,10 @@ public class Character {
 	
 	public void setStatus(Status status){
 		this.status = status;
+	}
+	
+	public void setSpriteLoc(String spriteLoc){
+		this.spriteLoc = spriteLoc;
 	}
 	
 	public void setAbilities(Ability[] ability){
@@ -311,6 +320,8 @@ public class Character {
 		team = Integer.parseInt(reader.readLine());
 		
 		status = getStatusByName(reader.readLine());
+		
+		setSpriteLoc(reader.readLine());
 				
 		String lastLine = reader.readLine();
 		if(lastLine != null) 
@@ -336,7 +347,8 @@ public class Character {
 		        				+ speed + backSpace
 		        				+ playTime + backSpace
 		        				+ team + backSpace
-		        				+ status + backSpace);
+		        				+ status + backSpace
+		        				+ spriteLoc + backSpace);
 		        if( ability != null){
 		        	for (int i=0; i<ability.length; i++){
 		        		writer.write(ability[i].getCodex() + "_");
@@ -370,7 +382,8 @@ public class Character {
 	        				+ speed + backSpace
 	        				+ playTime + backSpace
 	        				+ team + backSpace
-	        				+ status + backSpace);
+	        				+ status + backSpace
+	        				+ spriteLoc + backSpace);
 		        	if( ability != null){
 		        		for (int i=0; i<ability.length; i++){
 		        			writer.write(ability[i].getCodex() + "_");
