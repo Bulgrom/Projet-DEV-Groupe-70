@@ -22,10 +22,12 @@ public class LoadLevel extends JPanel {
 	private String[] infoMap;
 	private String[] infoTurns;
 	private String[] infoSize;
+	private String[] infoDate;
 	
 	private JLabel infoTurnsDisplayed;
 	private JLabel infoSizeDisplayed;
 	private JLabel infoMapDisplayed;
+	private JLabel infoDateDisplayed;
 
 	File directory = new File("saveParty");
 	String[] saves = directory.list();
@@ -65,76 +67,99 @@ public class LoadLevel extends JPanel {
 		infos.setMaximumSize(new Dimension(660,200));
 		infos.setOpaque(false);
 		
-		JLabel infoMapLabel = new JLabel("Map");
+		JLabel infoMapLabel = new JLabel(" Map");
 		infoMapLabel.setForeground(Color.white);
-		infoMapLabel.setFont(MenuButton.font2.deriveFont((float) 55));
+		infoMapLabel.setFont(MenuButton.font2.deriveFont((float) 45));
 		
-		JLabel infoTurnsLabel = new JLabel("Number of turns");
+		JLabel infoTurnsLabel = new JLabel(" Number of turns");
 		infoTurnsLabel.setForeground(Color.white);
-		infoTurnsLabel.setFont(MenuButton.font2.deriveFont((float) 55));
+		infoTurnsLabel.setFont(MenuButton.font2.deriveFont((float) 45));
 		
-		JLabel infoSizeLabel = new JLabel("Size");
+		JLabel infoSizeLabel = new JLabel(" Size");
 		infoSizeLabel.setForeground(Color.white);
-		infoSizeLabel.setFont(MenuButton.font2.deriveFont((float) 55));
+		infoSizeLabel.setFont(MenuButton.font2.deriveFont((float) 45));
+		
+		JLabel infoDateLabel = new JLabel(" Date");
+		infoDateLabel.setForeground(Color.white);
+		infoDateLabel.setFont(MenuButton.font2.deriveFont((float) 45));
 		
 		int numberParty = saves.length;
 		infoMap = new String[numberParty];
 		infoTurns = new String[numberParty];
 		infoSize = new String[numberParty];
+		infoDate = new String[numberParty];
 		int iter = 0;
 		for (String party : saves){
 			try{
 				BufferedReader reader = new BufferedReader(new FileReader(new File(directory+"/"+party+"/Map.txt")));
-				infoMap[iter] = reader.readLine()+"  ";
-				infoSize[iter] = reader.readLine()+"  ";
+				infoMap[iter] = "  "+reader.readLine()+"  ";
+				infoSize[iter] = "  "+reader.readLine()+"  ";
 				reader = new BufferedReader(new FileReader(new File(directory+"/"+party+"/data.txt")));
-				reader.readLine();
-				infoTurns[iter] = reader.readLine()+"  ";
+				infoDate[iter] = "  "+reader.readLine();
+				infoTurns[iter] = "  "+reader.readLine()+"  ";
 			} catch (Exception e){
 				e.printStackTrace();
 				infoMap[iter] = "N/A";
 				infoSize[iter] = "N/A";
 				infoTurns[iter] = "N/A";
+				infoDate[iter] = "N/A";
 			} finally {
 				iter++;
 			}
 		}
 		infoMapDisplayed = new JLabel(infoMap[0]);
-		infoMapDisplayed.setFont(MenuButton.font2.deriveFont((float) 40));
+		infoMapDisplayed.setFont(MenuButton.font2.deriveFont((float) 35));
 		infoMapDisplayed.setForeground(Color.white);
 		
 		infoSizeDisplayed = new JLabel(infoSize[0]);
-		infoSizeDisplayed.setFont(MenuButton.font2.deriveFont((float) 40));
+		infoSizeDisplayed.setFont(MenuButton.font2.deriveFont((float) 35));
 		infoSizeDisplayed.setForeground(Color.white);
 		
 		infoTurnsDisplayed = new JLabel(infoTurns[0]);
-		infoTurnsDisplayed.setFont(MenuButton.font2.deriveFont((float) 40));
+		infoTurnsDisplayed.setFont(MenuButton.font2.deriveFont((float) 35));
 		infoTurnsDisplayed.setForeground(Color.white);
+		
+		infoDateDisplayed = new JLabel(infoDate[0]);
+		infoDateDisplayed.setFont(MenuButton.font2.deriveFont((float) 35));
+		infoDateDisplayed.setForeground(Color.white);
 		
 		JPanel infos1 = new JPanel();
 		infos1.setLayout(new BoxLayout(infos1,BoxLayout.LINE_AXIS));
-		infos1.setMaximumSize(new Dimension(600,50));
+		infos1.setMaximumSize(new Dimension(600,40));
 		infos1.add(infoMapLabel);
+		infos1.add(Box.createRigidArea(new Dimension(160,0)));
 		infos1.add(infoMapDisplayed);
 		infos1.setOpaque(false);
 		
 		JPanel infos2 = new JPanel();
 		infos2.setLayout(new BoxLayout(infos2,BoxLayout.LINE_AXIS));
-		infos2.setMaximumSize(new Dimension(600,50));
+		infos2.setMaximumSize(new Dimension(600,40));
 		infos2.add(infoSizeLabel);
+		infos2.add(Box.createRigidArea(new Dimension(160,0)));
 		infos2.add(infoSizeDisplayed);
 		infos2.setOpaque(false);
 
 		JPanel infos3 = new JPanel();
 		infos3.setLayout(new BoxLayout(infos3,BoxLayout.LINE_AXIS));
-		infos3.setMaximumSize(new Dimension(600,50));
+		infos3.setMaximumSize(new Dimension(600,40));
 		infos3.add(infoTurnsLabel);
+		infos3.add(Box.createRigidArea(new Dimension(50,0)));
 		infos3.add(infoTurnsDisplayed);
 		infos3.setOpaque(false);
+		
+		JPanel infos4 = new JPanel();
+		infos4.setLayout(new BoxLayout(infos4,BoxLayout.LINE_AXIS));
+		infos4.setMaximumSize(new Dimension(600,40));
+		infos4.add(infoDateLabel);
+		infos4.add(Box.createRigidArea(new Dimension(150,0)));
+		infos4.add(infoDateDisplayed);
+		infos4.setOpaque(false);
 
+		infos.add(Box.createRigidArea(new Dimension(0,10)));
 		infos.add(infos1);
 		infos.add(infos2);
 		infos.add(infos3);
+		infos.add(infos4);
 
 		JPanel levelContent = new JPanel();
 		levelContent.setLayout(new BoxLayout(levelContent,BoxLayout.PAGE_AXIS));
@@ -180,6 +205,7 @@ public class LoadLevel extends JPanel {
 			infoMapDisplayed.setText(infoMap[levelSelection.getSelectedIndex()]);
 			infoTurnsDisplayed.setText(infoTurns[levelSelection.getSelectedIndex()]);
 			infoSizeDisplayed.setText(infoSize[levelSelection.getSelectedIndex()]);
+			infoDateDisplayed.setText(infoDate[levelSelection.getSelectedIndex()]);
 		    } 
 	}
 	
