@@ -14,7 +14,7 @@ import javax.swing.JPanel;
 public class LoadLevel extends JPanel {
 	
 	static MenuBackground loadLevels;
-	static Window w = ScreenMenu.w;
+	Window w = ScreenMenu.w;
 	
 	private LoadLevel(){
 		JLabel levels = new JLabel("Load a saved game");

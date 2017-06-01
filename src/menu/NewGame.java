@@ -14,7 +14,7 @@ import javax.swing.JPanel;
 public class NewGame extends JPanel {
 	
 	static MenuBackground newGame;
-	static Window w = ScreenMenu.w;
+	Window w = ScreenMenu.w;
 	
 	private NewGame(){
 		JLabel levels = new JLabel("Start a new game");
