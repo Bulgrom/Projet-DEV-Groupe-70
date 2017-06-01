@@ -9,6 +9,7 @@ import player.HumanPlayer;
 
 public class PartyTest {
 	private Party party = new Party();
+	private PartyInterface pi;
 
 	@Before
 	public void before() throws InstantiationException, IllegalAccessException, ClassNotFoundException, IOException{
@@ -32,8 +33,9 @@ public class PartyTest {
 		party.getMap().getSquare(3, 4).setCharacter(party.getCharacter(1));
 		party.getMap().getSquare(2, 2).setCharacter(party.getCharacter(2));
 		
-		party.initParty();
+		pi = new PartyInterface(party);
 		
+		System.out.println("Fin du Before");
 	}
 	
 	@Test
@@ -48,7 +50,6 @@ public class PartyTest {
 	
 	@Test
 	public void testInitialisationInterface(){
-		PartyInterface pi = new PartyInterface(party);
 		
 		assertTrue(party == pi.getParty());
 		
@@ -63,11 +64,15 @@ public class PartyTest {
 	@Test
 	public void testAction(){
 		
-		PartyInterface pi = new PartyInterface(party);
-		
 		HumanPlayer pu = pi.getCurrentPlayer();
 		
+		System.out.println(pu.getCurrentCharacter());
+		System.out.println(party.getMap());
+		
 		pu.move(party.getMap().getSquare(1, 1));
+		System.out.println(party.getMap());
+		System.out.println(pu.getCurrentCharacter());
+		
 		assertTrue(party.getMap().getSquare(0, 1).getCharacter() == null);
 		assertTrue(party.getMap().getSquare(1, 1).getCharacter() == party.getCharacter(0));
 		 
@@ -78,7 +83,6 @@ public class PartyTest {
 	
 	@Test
 	public void testEndTurn(){
-		PartyInterface pi = new PartyInterface(party);
 		
 		HumanPlayer pu = pi.getCurrentPlayer();
 		assertTrue(pu.getCurrentCharacter().equals(party.getCharacter(0)));
@@ -118,5 +122,12 @@ public class PartyTest {
 		pu.changeCharacter(pu.getPlayableCharacter(1));
 		assertTrue(pu.getCurrentCharacter().equals(party.getCharacter(1)));
 		
+	}
+	
+	@Test
+	public void testCurrentCharacterPosition() throws InstantiationException, IllegalAccessException, ClassNotFoundException, IOException{
+		Party party = new Party("saveParty/party1/");
+		PartyInterface pi = new PartyInterface(party);
+		System.out.println(pi.getCurrentPlayer().getCurrentCharacter());
 	}
 }

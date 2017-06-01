@@ -39,8 +39,6 @@ public class Party {
 		BufferedReader reader = new BufferedReader(new FileReader(partyDirectory+"data.txt"));
 		setName(reader.readLine());
 		reader.close();
-		
-		initParty();
 	}
 	
 	
@@ -114,16 +112,19 @@ public class Party {
 			for(int i=0; i<allCharacters.size(); i++) allCharacters.get(i).decPlayTime();
 		}
 		
-		order.remove(characterPlayed);
+		int index;
+		if(order.contains(characterPlayed)){
+			order.remove(characterPlayed);
 		
-		playableCharacters.add(order.get(0));
-		int index = 1;
+			playableCharacters.add(order.get(0));
+			index = 1;
 
-		while(index < order.size() && ((characterPlayed.getTeam() == order.get(index).getTeam()) ||
-				(characterPlayed.getSpeed()*characterPlayed.getPlayTime() >= order.get(index).getSpeed()*order.get(index).getPlayTime()))){
-			index++;
+			while(index < order.size() && ((characterPlayed.getTeam() == order.get(index).getTeam()) ||
+					(characterPlayed.getSpeed()*characterPlayed.getPlayTime() >= order.get(index).getSpeed()*order.get(index).getPlayTime()))){
+				index++;
+			}
+			order.add(index,characterPlayed);
 		}
-		order.add(index,characterPlayed);
 		
 		index = 1;
 		while( index < order.size() && (order.get(0).getTeam() == order.get(index).getTeam()) ){
