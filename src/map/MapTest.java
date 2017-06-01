@@ -21,8 +21,7 @@ public class MapTest {
 	@Before
 	public void before(){
 		System.out.println(backSpace + "Nouveau Test");
-		m = new Map(4,5);
-		m.setName("Test");
+		m = new Map("Test",4,5);
 		System.out.println(m);
 		
 		pers1 = new Character("pers1", 1, 1000, 3, 6, 20, 30, 10);

@@ -28,7 +28,7 @@ public class Map {
 	    }
 	   }
 	
-	public Map(int height, int length){
+	public Map(String name, int height, int length){
 		map = new Square[height][length];
 		setDim(height, length);
 		for(int i=0; i<height; i++){
