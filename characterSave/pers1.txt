@@ -9,4 +9,5 @@ pers1
 1
 0
 HEALTHY
+None
 ability.damageAbility.Punch-50_ability.damageAbility.BasicArrow-50-4_

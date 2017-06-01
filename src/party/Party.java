@@ -6,7 +6,11 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Locale;
 
 import map.Character;
 
@@ -14,18 +18,19 @@ public class Party {
 	
 	private static String backSpace = System.lineSeparator();
 	private int id;
-	private String name;
+	private Calendar date = Calendar.getInstance() ;
+	private static final SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM yyyy HH:mm:ss", Locale.FRENCH);
 	private Map map;
 	private ArrayList<Character> allCharacters = new ArrayList<Character>();
 	private ArrayList<Character> order = new ArrayList<Character>();
 	private Character lastCharacter;
+	private int numberOfTurns = 0;
 
 	public Party(){
 		String directory = "saveParty/";
 		File d = new File(directory);
 		d.mkdir();
 		setId(d.list().length+1);
-		this.name = "party " + id;
 	};
 	
 	public Party(String partyDirectory) throws InstantiationException, IllegalAccessException, ClassNotFoundException, IOException{
@@ -37,7 +42,13 @@ public class Party {
 		}
 		
 		BufferedReader reader = new BufferedReader(new FileReader(partyDirectory+"data.txt"));
-		setName(reader.readLine());
+		try {
+			setDate(reader.readLine());
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		setNumberOfTurns(Integer.parseInt(reader.readLine()));
 		reader.close();
 	}
 	
@@ -46,12 +57,16 @@ public class Party {
 		return id;
 	}
 	
-	public String getName(){
-		return name;
-	}
-	
 	public Map getMap(){
 		return map;
+	}
+	
+	public String getDate(){
+		return sdf.format(date.getTime());
+	}
+	
+	public int getNumberOfTurns(){
+		return numberOfTurns;
 	}
 	
 	public Character getCharacter(int index){
@@ -74,11 +89,18 @@ public class Party {
 		this.id = id;
 	}
 	
-	public void setName(String name){
-		this.name = name;
+	public void setDate(String date) throws ParseException{
+		this.date.setTime(sdf.parse(date));
 	}
 	
+	public void setNumberOfTurns(int numberOfTurns){
+		this.numberOfTurns = numberOfTurns;
+	}
 	
+	public void incTurns(){
+		numberOfTurns++;
+	}
+
 	public boolean isFirstPlayerTurn(){
 		return order.get(0).getTeam() == 1;
 	}
@@ -157,14 +179,14 @@ public class Party {
 	        file .createNewFile();
 	        final FileWriter writer = new FileWriter(file);
 	        try {
-	        	writer.write(name + backSpace);
+	        	writer.write(getDate() + backSpace + numberOfTurns + backSpace);
 	        }
 	        finally {
 	            writer.close();
 	        }
 	    }
 	    catch (Exception e) {
-	        System.out.println("Impossible de creer le fichier du Personnage " + name);
+	        System.out.println("Impossible de creer le fichier de la party " + id);
 	    }
 		
 		map.saveMap(directory);

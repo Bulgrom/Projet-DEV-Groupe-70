@@ -64,6 +64,7 @@ public class PartyInterface {
 	*/
 	
 	public void endTurn(Character characterPlayed){
+		party.incTurns();
 		ArrayList<Character> playableCharacters = party.nextCharacters(characterPlayed);
 		if(playableCharacters.size() == party.getOrder().size()) win(playableCharacters.get(0).getTeam());
 		if(party.isFirstPlayerTurn()){
