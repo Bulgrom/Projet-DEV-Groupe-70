@@ -36,9 +36,11 @@ public class Party {
 	public Party(String partyDirectory) throws InstantiationException, IllegalAccessException, ClassNotFoundException, IOException{
 		(new File("saveParty/")).mkdir();
 		map = new Map(partyDirectory);
-		File directory = new File(partyDirectory);
-		for(int i=1; i<directory.list().length-3; i++){
-			allCharacters.add(new Character(partyDirectory + "Character_"+i+".txt"));
+		for(int i=0; i<map.getLines(); i++){
+			for(int j=0; j<map.getColumns();j++){
+				if(map.getSquare(i, j).getCharacter() != null) allCharacters.add(map.getSquare(i, j).getCharacter());
+			}
+			
 		}
 		
 		BufferedReader reader = new BufferedReader(new FileReader(partyDirectory+"data.txt"));

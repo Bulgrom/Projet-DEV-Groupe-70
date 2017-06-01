@@ -43,6 +43,8 @@ public class PartyTest {
 		party.saveParty();
 		
 		party = new Party("saveParty/party1/");
+		
+		assertTrue(party.getCharacter(0).getPosition() != null);
 		party.saveNewParty();
 		
 	}
