@@ -19,7 +19,7 @@ public class Party {
 	private static String backSpace = System.lineSeparator();
 	private int id;
 	private Calendar date = Calendar.getInstance() ;
-	private static final SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM yyyy HH:mm:ss", Locale.FRENCH);
+	private static final SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM yyyy HH:mm:ss", Locale.ENGLISH);
 	private Map map;
 	private ArrayList<Character> allCharacters = new ArrayList<Character>();
 	private ArrayList<Character> order = new ArrayList<Character>();
