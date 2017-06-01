@@ -13,11 +13,11 @@ import javax.swing.JPanel;
 
 public class NewGame extends JPanel {
 	
-	static Background newGame;
+	static MenuBackground newGame;
 	static Window w = ScreenMenu.w;
 	
 	private NewGame(){
-		JLabel levels = new JLabel("Load a saved game");
+		JLabel levels = new JLabel("Start a new game");
 		levels.setForeground(Color.red);
 		levels.setFont(MenuButton.newFont.deriveFont((float) 55));
 		
@@ -61,7 +61,7 @@ public class NewGame extends JPanel {
 		centerLevels.add(Box.createHorizontalGlue());
 		centerLevels.setOpaque(false);
 		
-		newGame = new Background("img/longforest.jpg");
+		newGame = new MenuBackground("img/longforest.jpg");
 		newGame.setLayout(new BoxLayout(newGame,BoxLayout.PAGE_AXIS));
 		newGame.add(Box.createVerticalGlue());
 		newGame.add(centerLevels);
@@ -77,7 +77,7 @@ public class NewGame extends JPanel {
 	
 	class Back implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
-			w.setContentPane(ScreenMenu.screen);
+			w.setContentPane(ScreenMenu.getScreenMenu(w));
 		    } 
 	}
 	
@@ -89,7 +89,7 @@ public class NewGame extends JPanel {
 	
 	private static NewGame screen = new NewGame();
 	
-	public static Background getNewGame(){
+	public static MenuBackground getNewGame(){
 		return newGame;
 	}
 }

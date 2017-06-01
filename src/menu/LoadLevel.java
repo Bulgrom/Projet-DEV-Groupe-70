@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 
 public class LoadLevel extends JPanel {
 	
-	static Background loadLevels;
+	static MenuBackground loadLevels;
 	static Window w = ScreenMenu.w;
 	
 	private LoadLevel(){
@@ -61,7 +61,7 @@ public class LoadLevel extends JPanel {
 		centerLevels.add(Box.createHorizontalGlue());
 		centerLevels.setOpaque(false);
 		
-		loadLevels = new Background("img/darkforest.jpg");
+		loadLevels = new MenuBackground("img/darkforest.jpg");
 		loadLevels.setLayout(new BoxLayout(loadLevels,BoxLayout.PAGE_AXIS));
 		loadLevels.add(Box.createVerticalGlue());
 		loadLevels.add(centerLevels);
@@ -77,7 +77,7 @@ public class LoadLevel extends JPanel {
 	
 	class Back implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
-			w.setContentPane(ScreenMenu.screen);
+			w.setContentPane(ScreenMenu.getScreenMenu(w));
 		    } 
 	}
 	
@@ -89,7 +89,7 @@ public class LoadLevel extends JPanel {
 	
 	private static LoadLevel screen = new LoadLevel();
 	
-	public static Background getLoadLevel(){
+	public static MenuBackground getLoadLevel(){
 		return loadLevels;
 	}
 }

@@ -11,13 +11,14 @@ import javax.swing.JPanel;
 
 public class ScreenMenu extends JPanel{
 	
-	Color yellow = Color.getHSBColor((float)0.14, 1, 1);	
-	MenuButton startNewGame = new MenuButton("New Game", yellow);
-	MenuButton loadLevel = new MenuButton("Load a level", yellow);
-	MenuButton options = new MenuButton ("Options", yellow);
-	MenuButton quit = new MenuButton("Quit", yellow);
-	static Background screen;
-	Background screenLevels;
+	private Color yellow = Color.getHSBColor((float)0.14, 1, 1);	
+	private MenuButton startNewGame = new MenuButton("New Game", yellow);
+	private MenuButton loadLevel = new MenuButton("Load a level", yellow);
+	private MenuButton options = new MenuButton ("Options", yellow);
+	private MenuButton quit = new MenuButton("Quit", yellow);
+	private MenuBackground screenLevels;
+	
+	private static MenuBackground screen;
 	static Window w;
 	
 	private ScreenMenu(){
@@ -44,7 +45,7 @@ public class ScreenMenu extends JPanel{
 		centerMenu.add(Box.createVerticalGlue());
 		centerMenu.setOpaque(false);
 		
-		screen = new Background("img/forest.jpg");
+		screen = new MenuBackground("img/forest.jpg");
 		screen.setOpaque(false);
 		screen.setLayout(new BoxLayout(screen,BoxLayout.PAGE_AXIS));
 		screen.add(Box.createHorizontalGlue());
@@ -55,7 +56,7 @@ public class ScreenMenu extends JPanel{
 	
 	private static ScreenMenu screenMenu = new ScreenMenu();
 	
-	public static Background getScreenMenu(Window window){
+	public static MenuBackground getScreenMenu(Window window){
 		w = window;
 		return screen;
 	}
