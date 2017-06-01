@@ -4,17 +4,13 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.NumberFormat;
-import java.util.stream.IntStream;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JComboBox;
-import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-
 
 
 public class EditMenu extends JPanel {
@@ -22,7 +18,7 @@ public class EditMenu extends JPanel {
 	Window w = ScreenMenu.w;
 	static private MenuBackground editMenu;
 	private int mapHeight = 5;
-	private int mapLenght = 5;
+	private int mapLength = 5;
 	private String mapName;
 	
 	private JComboBox<Integer> lengthBox;
@@ -32,7 +28,7 @@ public class EditMenu extends JPanel {
 	private EditMenu(){
 		JLabel mapSize = new JLabel("Create a Map : size and name");
 		mapSize.setForeground(Color.red);
-		mapSize.setFont(MenuButton.newFont.deriveFont((float) 55));
+		mapSize.setFont(MenuButton.font2.deriveFont((float) 55));
 		
 		JPanel name = new JPanel();
 		name.setMaximumSize(new Dimension(500,60));
@@ -43,7 +39,7 @@ public class EditMenu extends JPanel {
 		heightLabel.setForeground(Color.white);
 		heightLabel.setFont(MenuButton.newFont.deriveFont((float) 45));
 		
-		JLabel lenghtLabel = new JLabel("Lenght");
+		JLabel lenghtLabel = new JLabel("Length");
 		lenghtLabel.setForeground(Color.white);
 		lenghtLabel.setFont(MenuButton.newFont.deriveFont((float) 45));
 		
@@ -58,7 +54,7 @@ public class EditMenu extends JPanel {
 		mapNameField.setPreferredSize(new Dimension(500,40));
 		mapNameField.setForeground(Color.white);
 		mapNameField.setBackground(Color.black);
-		mapNameField.setFont(MenuButton.newFont.deriveFont((float) 35));
+		mapNameField.setFont(MenuButton.font2.deriveFont((float) 35));
 		
 		JLabel fileName = new JLabel("Name");
 		fileName.setForeground(Color.white);
@@ -74,7 +70,7 @@ public class EditMenu extends JPanel {
 		heightBox = new JComboBox<>(tab);
 		heightBox.setPreferredSize(new Dimension(250,40));
 		heightBox.setSelectedItem(5);
-		heightBox.setFont(MenuButton.newFont.deriveFont((float) 25));
+		heightBox.setFont(MenuButton.font2.deriveFont((float) 25));
 		heightBox.setBackground(Color.black);
 		heightBox.setForeground(Color.white);
 
@@ -82,7 +78,7 @@ public class EditMenu extends JPanel {
 		lengthBox = new JComboBox<>(tab);
 		lengthBox.setPreferredSize(new Dimension(250,40));
 		lengthBox.setSelectedItem(5);
-		lengthBox.setFont(MenuButton.newFont.deriveFont((float) 25));
+		lengthBox.setFont(MenuButton.font2.deriveFont((float) 25));
 		lengthBox.setBackground(Color.black);
 		lengthBox.setForeground(Color.white);
 		
@@ -131,7 +127,7 @@ public class EditMenu extends JPanel {
 		center.add(Box.createHorizontalGlue());
 		center.setOpaque(false);
 		
-		editMenu = new MenuBackground("img/sea.jpg");
+		editMenu = new MenuBackground("img/darkforest2.jpg");
 		editMenu.setLayout(new BoxLayout(editMenu,BoxLayout.PAGE_AXIS));
 		editMenu.add(Box.createVerticalGlue());
 		editMenu.add(center);
@@ -149,7 +145,7 @@ public class EditMenu extends JPanel {
 	class Create implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
 			mapHeight = (int) heightBox.getSelectedItem();
-			mapLenght = (int) lengthBox.getSelectedItem();
+			mapLength = (int) lengthBox.getSelectedItem();
 			mapName = mapNameField.getText();
 		} 
 	}
@@ -160,15 +156,4 @@ public class EditMenu extends JPanel {
 		} 
 	}
 	
-//	class Height implements ActionListener{
-//		public void actionPerformed(ActionEvent e){
-//			
-//		}
-//	}
-//	
-//	class Length implements ActionListener{
-//		public void actionPerformed(ActionEvent e){
-//			
-//		}
-//	}
 }

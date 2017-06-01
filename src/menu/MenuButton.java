@@ -22,6 +22,7 @@ import java.awt.event.MouseListener;
 public class MenuButton extends JButton implements MouseListener {
 	
 	public static Font newFont = new Font("Times New Roman",Font.ITALIC,30);
+	public static Font font2 = new Font("Times New Roman",Font.ITALIC,30);
 	private String name;
 	private Image img;
 	private Color color;
@@ -31,6 +32,16 @@ public class MenuButton extends JButton implements MouseListener {
 	    ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		newFont = Font.createFont(Font.TRUETYPE_FONT,new File("newFont.ttf"));
 		ge.registerFont(newFont);
+	} catch (FontFormatException e) {
+		System.out.print("Nope");
+	} catch (IOException e1) {
+		System.out.print("Nopebis");
+	}}
+	
+	{try {
+	    ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+		font2 = Font.createFont(Font.TRUETYPE_FONT,new File("font2.ttf"));
+		ge.registerFont(font2);
 	} catch (FontFormatException e) {
 		System.out.print("Nope");
 	} catch (IOException e1) {
