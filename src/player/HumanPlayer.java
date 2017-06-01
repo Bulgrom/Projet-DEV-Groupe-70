@@ -49,6 +49,10 @@ public class HumanPlayer {
 		currentCharacter.useAbility(ability, square);
 		if(square.getCharacter().getStatus() == Status.DEAD) party.getOrder().remove(square.getCharacter());
 		characterPlayed = true;
+		if(currentCharacter.isDead()){
+			party.getOrder().remove(currentCharacter);
+			endTurn();
+		}
 	}
 	
 	public void endTurn(){
@@ -56,6 +60,9 @@ public class HumanPlayer {
 		currentCharacter.resetMovement();
 		currentCharacter.resetAction();
 		currentCharacter.resetPv();
+		if(currentCharacter.isDead()){
+			party.getOrder().remove(currentCharacter);
+		}
 		partyInterface.endTurn(currentCharacter);
 	}
 	

@@ -239,20 +239,23 @@ public class Character {
 	
 	public void move(Square square){
 		if(checkMove(square)){
-			getPosition().setCharacter(null);
+			Path path = new Path(position, square, pm);
+			for(int i=1; i<path.getPath().length; i++){
+				if(path.getPath()[i].getTrap() != null) path.getPath()[i].getTrap().activation(this);
+				pm--;
+			}
+			position.setCharacter(null);
 			square.setCharacter(this);
-			
 		}
 	}
 	
+
 	public boolean checkMove(Square square){
 		if(!(square.getCharacter()==null)) return false;
 		if(Math.abs(position.getCoord()[0] - square.getCoord()[0]) 
 				+ Math.abs(position.getCoord()[1] - square.getCoord()[1]) > pm) return false;
 		Path path = new Path(position, square, pm);
-		if(!path.isReachable()) return false;
-		
-		return true;
+		return path.isReachable();
 	}
 		
 	
@@ -281,7 +284,10 @@ public class Character {
 	}
 	
 	public void checkDeath(){
-		if(pv <= 0) status = Status.DEAD;
+		if(pv <= 0){
+			status = Status.DEAD;
+			position.setCharacter(null);
+		}
 	}
 	
 	public boolean isDead(){

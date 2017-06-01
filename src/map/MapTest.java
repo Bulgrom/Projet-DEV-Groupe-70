@@ -187,14 +187,18 @@ public class MapTest {
 		assertFalse(pers1.checkMove(m.getSquare(0, 4)));
 		pers1.move(m.getSquare(0, 4));
 		System.out.println(m);
-		
+		System.out.println(pers1);
 		
 		assertTrue(pers1.checkMove(m.getSquare(1, 2)));
 		pers1.move(m.getSquare(1, 2));
 		System.out.println(m);
+		System.out.println(pers1);
 		
+		
+		pers1.setPM(3);
 		pers1.move(m.getSquare(3, 2));
 		
+		pers1.setPM(3);
 		assertFalse(pers1.checkMove(m.getSquare(3, 4)));
 		pers1.move(m.getSquare(3, 4));
 		

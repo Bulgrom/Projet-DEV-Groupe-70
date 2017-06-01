@@ -13,26 +13,31 @@ public class PartyInterface {
 	
 	
 	public PartyInterface(Party party){
-		this.party = party;
+		setParty(party);
 		currentPlayer = new HumanPlayer(this, party.firstCharacters());
 	}
 	
 	public PartyInterface(Party party, boolean firstPlayerisAI, boolean secondPlayerisAI ){
-		this.party = party;
+		setParty(party);
 		this.firstPlayerisAI = firstPlayerisAI;
 		this.secondPlayerisAI = secondPlayerisAI;
-		if(party.isFirstPlayerTurn()){
-			if(!firstPlayerisAI) currentPlayer = new HumanPlayer(this, party.firstCharacters());
-			else currentPlayer = new AIPlayer(this, party.firstCharacters());
+		if(this.party.isFirstPlayerTurn()){
+			if(!firstPlayerisAI) currentPlayer = new HumanPlayer(this, this.party.firstCharacters());
+			else currentPlayer = new AIPlayer(this, this.party.firstCharacters());
 		}
 		else{
-			if(!secondPlayerisAI) currentPlayer = new HumanPlayer(this, party.firstCharacters());
-			else currentPlayer = new AIPlayer(this, party.firstCharacters());
+			if(!secondPlayerisAI) currentPlayer = new HumanPlayer(this, this.party.firstCharacters());
+			else currentPlayer = new AIPlayer(this, this.party.firstCharacters());
 		}
 	}
 	
 	public Party getParty(){
 		return party;
+	}
+	
+	public void setParty(Party party){
+		this.party = party;
+		party.initParty();
 	}
 	
 	public HumanPlayer getCurrentPlayer(){
@@ -48,6 +53,10 @@ public class PartyInterface {
 		party.saveNewParty();
 	}
 	
+	public void win(int team){
+		System.out.println("L'equipe " + team + " a gagne !!!");
+	}
+	
 	/*
 	public void quit(){
 		return menu;
@@ -56,6 +65,7 @@ public class PartyInterface {
 	
 	public void endTurn(Character characterPlayed){
 		ArrayList<Character> playableCharacters = party.nextCharacters(characterPlayed);
+		if(playableCharacters.size() == party.getOrder().size()) win(playableCharacters.get(0).getTeam());
 		if(party.isFirstPlayerTurn()){
 			if(!firstPlayerisAI) currentPlayer = new HumanPlayer(this, playableCharacters);
 			else currentPlayer = new AIPlayer(this, playableCharacters);
