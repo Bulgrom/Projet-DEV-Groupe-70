@@ -29,7 +29,7 @@ public class Character {
 	private int playTime = 1;
 	private int team = 0;
 	private Status status = Status.HEALTHY;
-	private String spriteLoc;
+	private String spriteLoc = "None";
 	
 	public Character(String filename) throws IOException, InstantiationException, IllegalAccessException, ClassNotFoundException{
 	    readPlayer(new File(filename));
