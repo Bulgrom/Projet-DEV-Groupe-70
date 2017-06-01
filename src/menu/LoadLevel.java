@@ -1,6 +1,5 @@
 package menu;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -36,9 +35,9 @@ public class LoadLevel extends JPanel {
 	private JRadioButton human2;
 	private JRadioButton ai2;
 
-	File directory = new File("saveParty");
-	String[] saves = directory.list();
-	JComboBox<String> levelSelection = new JComboBox<String>(saves);
+	private File directory = new File("saveParty");
+	private String[] saves = directory.list();
+	private JComboBox<String> levelSelection = new JComboBox<String>(saves);
 	
 	private LoadLevel(){
 		JLabel levels = new JLabel("Load a saved game");
