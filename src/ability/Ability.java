@@ -8,6 +8,7 @@ import map.Character;
 		
 		private int radius;
 		private String name;
+		private int paCost = 10;
 		
 		public Ability(){};
 		
@@ -16,6 +17,11 @@ import map.Character;
 		}
 		
 		public abstract void use(Square userLoc, Square aim);
+		
+		public abstract String getCodex();
+		
+		public abstract void setParameters(String[] parameters);
+		
 	
 		public String getName(){
 			return name;
@@ -24,13 +30,17 @@ import map.Character;
 		public int getRadius(){
 			return radius;
 		}
-		
-		public abstract String getCodex();
-		
-		public abstract void setParameters(String[] parameters);
+	
+		public int getPaCost(){
+			return paCost;
+		}
 		
 		public void setRadius(int radius){
 			this.radius = radius;
+		}
+		
+		public void setPaCost(int paCost){
+			this.paCost = paCost;
 		}
 		
 		
@@ -50,6 +60,10 @@ import map.Character;
 			}
 
 			return true;
+		}
+		
+		public boolean checkPa(Character c){
+			return c.getPA() <= paCost;
 		}
 		
 		public void physicalDamage(Character c, int damage){

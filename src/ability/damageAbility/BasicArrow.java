@@ -26,16 +26,18 @@ public class BasicArrow extends Ability{
 	}
 	
 	public void setParameters(String[] parameters){
-		if (parameters.length != 2) System.out.println("Erreur dans setParameters de Punch");
+		if (parameters.length != 2) System.out.println("Erreur dans setParameters de BasicArrow");
 		
 		setDamage(Integer.parseInt(parameters[0]));
 		setRadius(Integer.parseInt(parameters[1]));
 	}
 	
 	public void use(Square userLocation, Square aim){
-		if(range(userLocation, aim)){
-			Character p = aim.getCharacter();
-			if (p != null) physicalDamage(p, damage);
+		if(checkPa(userLocation.getCharacter())){
+			if(range(userLocation, aim)){
+				Character p = aim.getCharacter();
+				if (p != null) physicalDamage(p, damage);
+			}
 		}
 	}
 	

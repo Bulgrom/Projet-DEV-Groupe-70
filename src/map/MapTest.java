@@ -128,11 +128,9 @@ public class MapTest {
 		
 		m.getSquare(0,1).setBackground(Background.SAND);
 		m.getSquare(0, 2).setElement(new Wall());
-		m.getSquare(0, 2).getElement().setId(1);
 		
 		m.getSquare(1,0).setBackground(Background.WATER);
 		m.getSquare(1,0).setElement(new SmallRock());
-		m.getSquare(1,0).getElement().setId(2);
 		System.out.println(m);
 		
 		m.saveMap("mapSave/Test/");

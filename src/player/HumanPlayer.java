@@ -11,10 +11,12 @@ public class HumanPlayer {
 	private ArrayList<Character> playableCharacters = new ArrayList<Character>();
 	private Character currentCharacter;
 	private boolean characterPlayed = false;
+	private Party party;
 	
 	
 	public HumanPlayer(PartyInterface partyInterface, ArrayList<Character> playableCharacters){
 		this.partyInterface = partyInterface;
+		party = partyInterface.getParty();
 		this.playableCharacters = playableCharacters;
 		this.currentCharacter = playableCharacters.get(0);
 	}
@@ -38,14 +40,14 @@ public class HumanPlayer {
 		currentCharacter.move(square);
 		characterPlayed = true;
 		if(currentCharacter.isDead()){
-			partyInterface.getParty().getOrder().remove(currentCharacter);
+			party.getOrder().remove(currentCharacter);
 			endTurn();
 		}
 	}
 	
 	public void useAction(Ability ability, Square square){
 		currentCharacter.useAbility(ability, square);
-		if(square.getCharacter().getStatus() == Status.DEAD) partyInterface.getParty().getOrder().remove(square.getCharacter());
+		if(square.getCharacter().getStatus() == Status.DEAD) party.getOrder().remove(square.getCharacter());
 		characterPlayed = true;
 	}
 	

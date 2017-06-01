@@ -13,25 +13,14 @@ public abstract class Trap extends ability.Ability {
 		super(name);
 	}
 	
-	public boolean equals(Object trap){
-		if(!(trap instanceof Trap)) return false;
-		
-		Trap t = (Trap) trap;
-		
-		return (this.id == t.id); 
+	public int getId(){
+		return id;
 	}
 
-	public String getCodex(){
-		return id + "_" + "ability.trap." + getName();
-	}
+	public abstract String getCodex();
 
 
-	public void use(Square userLoc, Square aim) {
-		if(range(userLoc, aim)){
-			Trap t = aim.getTrap();
-			if (t != null) aim.setTrap(this);
-		}
-	}
+	public abstract void use(Square userLoc, Square aim);
 
 	public void setId(int id){
 		this.id = id;
@@ -40,5 +29,7 @@ public abstract class Trap extends ability.Ability {
 	public abstract void activation(Character character);
 	
 	public abstract void setParameters(String[] parameters);
+	
+	public abstract boolean equals(Object trap);
 
 }

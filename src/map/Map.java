@@ -15,6 +15,7 @@ public class Map {
 	private String name;
 	private Square[][] map;
 	protected int[] dim = new int[2];
+	private int maxTrapId = 1;
 	
 	
 	public Map(String directory) throws IOException, InstantiationException, IllegalAccessException, ClassNotFoundException{
@@ -29,6 +30,7 @@ public class Map {
 	   }
 	
 	public Map(String name, int height, int length){
+		setName(name);
 		map = new Square[height][length];
 		setDim(height, length);
 		for(int i=0; i<height; i++){
@@ -64,6 +66,10 @@ public class Map {
 		return dim;
 	}
 	
+	public int getMaxTrapId(){
+		return maxTrapId;
+	}
+	
 	public void setName(String name){
 		this.name = name;
 	}
@@ -79,6 +85,10 @@ public class Map {
 	public void setDim(int i, int j){
 		dim[0] = i;
 		dim[1] = j;
+	}
+	
+	public void setMaxTrapId(int maxTrapId){
+		this.maxTrapId = maxTrapId;
 	}
 	
 	public String[][] readMap(File root) throws IOException{
@@ -115,11 +125,14 @@ public class Map {
 	        	writer.write(name + backSpace + dim[0] + "x" + dim[1] + backSpace);
 	        	for (int i=0; i < dim[0]; i++){
 	        		for (int j=0; j < dim[1]; j++){
-	        			writer.write(getSquare(i, j) + "_");
 	        			if((getSquare(i,j).getElement() != null) && !(elementList.contains(getSquare(i,j).getElement()))) 
 	        					elementList.add(getSquare(i,j).getElement());
-	        			if((getSquare(i,j).getTrap() != null) && !(trapList.contains(getSquare(i,j).getTrap()))) 
+	        			if(getSquare(i,j).getTrap() != null){
+	        				if (!(trapList.contains(getSquare(i,j).getTrap())))
         						trapList.add(getSquare(i,j).getTrap());
+	        				else getSquare(i,j).getTrap().setId(trapList.get(trapList.indexOf(getSquare(i,j).getTrap())).getId());
+	        			}
+	        			writer.write(getSquare(i, j) + "_");
 	        		}
 	        		writer.write(backSpace);
 	        	}

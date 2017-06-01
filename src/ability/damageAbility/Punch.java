@@ -35,11 +35,10 @@ public class Punch extends Ability {
 	}
 	
 	public void use(Square userLocation, Square aim){
-		if(range(userLocation, aim)){
-		
-			Character p = aim.getCharacter();
-			if (p != null){
-				physicalDamage(p, damage);
+		if(checkPa(userLocation.getCharacter())){
+			if(range(userLocation, aim)){
+				Character p = aim.getCharacter();
+				if (p != null) physicalDamage(p, damage);
 			}
 		}
 	}

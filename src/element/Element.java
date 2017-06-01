@@ -11,7 +11,8 @@ public class Element {
 	
 	public Element(){}
 	
-	public Element( boolean allowWalk, boolean hideView){
+	public Element(int id, boolean allowWalk, boolean hideView){
+		this.id = id;
 		this.allowWalk = allowWalk;
 		this.allowView = hideView;
 	}
@@ -58,7 +59,7 @@ public class Element {
 		if(!(element instanceof Element)) return false;
 		
 		Element e = (Element) element;
-		return this.id == e.id;
+		return (this.id == e.id) && (this.name == e.name);
 	}
 	
 }

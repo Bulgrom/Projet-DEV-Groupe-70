@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Arrays;
+
 import ability.trap.*;
 import element.Element;
 
@@ -135,6 +137,8 @@ public class Square {
 	
 	public void setTrap(Trap trap){
 		this.trap = trap;
+		trap.setId(map.getMaxTrapId());
+		map.setMaxTrapId(map.getMaxTrapId()+1);
 	}
 	
 	public void setTrap(String directory, int id) throws IOException{
@@ -144,10 +148,16 @@ public class Square {
 		try {
 			line = reader.readLine();
 			while (line != null){
-				if(Integer.parseInt(line.split("_")[0]) == id) setTrap((Trap) Class.forName(line.split("_")[1]).newInstance());
-				line = reader.readLine();
+				if(Integer.parseInt(line.split("_")[0]) == id){
+					String[] parameters = line.split("_")[1].split("-");
+					Trap trap = (Trap) Class.forName(parameters[0]).newInstance();
+					trap.setParameters(Arrays.copyOfRange(parameters, 1, parameters.length));
+					setTrap(trap);
+					line = null;
+				}else line = reader.readLine();
 			}
 			getTrap().setId(id);
+			if(map.getMaxTrapId() <= id) map.setMaxTrapId(id+1);
 		} catch (IOException | InstantiationException | IllegalAccessException | ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
