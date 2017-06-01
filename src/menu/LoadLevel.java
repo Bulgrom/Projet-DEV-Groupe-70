@@ -1,5 +1,7 @@
 package menu;
 
+import gui.TestGUI;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -257,8 +259,13 @@ public class LoadLevel extends JPanel {
 	
 	class Load implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
-			
-		    } 
+			try {
+				TestGUI.showMap(w,"saveParty/"+levelSelection.getSelectedItem()+"/",(String) levelSelection.getSelectedItem());
+			} catch (Exception k) {
+				System.out.println("Fail");
+				System.exit(0);
+			}
+		} 
 	}
 	
 	class Back implements ActionListener{

@@ -10,7 +10,7 @@ public class Menu {
 			Window window = new Window();
 			
 			window.setTitle("Game");
-			window.setSize(1000, 600);
+			window.setSize(600, 600);
 			window.setMinimumSize(new Dimension(600,438));
 			window.setLocationRelativeTo(null);
 			window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

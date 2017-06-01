@@ -1,14 +1,17 @@
 package gui;
 
-import java.awt.Dimension;
 import java.awt.*;
+
 import javax.swing.*;
 
 import java.awt.event.*;
 import java.util.Arrays;
+
 import logger.*;
 import map.*;
 import party.*;
+import menu.*;
+import menu.Window;
 
 public class Board extends JPanel implements ActionListener {
 
@@ -16,7 +19,7 @@ public class Board extends JPanel implements ActionListener {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private JFrame frame;
+	private Window frame;
 	private Case listCase[][];
 	private Map map;
 	private int length;
@@ -25,9 +28,12 @@ public class Board extends JPanel implements ActionListener {
 	private map.Character charRequesting;
 	private Controller controller;
 	private PartyInterface partyInterface;
+	private String partyName;
 	
 	
-	public Board(PartyInterface partyInterface) {
+	public Board(PartyInterface partyInterface, Window w, String name) {
+		this.frame = w;
+		this.partyName = name;
 		this.map = partyInterface.getParty().getMap();
 		this.partyInterface = partyInterface;
 		this.length = map.getDim()[0];
@@ -51,19 +57,14 @@ public class Board extends JPanel implements ActionListener {
 	}
 
 	public void initUI() {
-		frame = new JFrame();
 		frame.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent we) {
-				map.saveMap("/saveMap"); // Not Sure about the directory
+				map.saveMap("saveParty/"+partyName+"/"); // Not Sure about the directory
 				GameLogger.infoLogs("Carte sauvegardée");
 				System.exit(0);
 			}
 		});
-		frame.setTitle("C'est pas sorcier : Civil War");
-		frame.setLocationRelativeTo(null);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setSize(new Dimension(500, 500));
 		this.setLayout(new GridLayout(length, height));
 		
 	}
@@ -75,7 +76,7 @@ public class Board extends JPanel implements ActionListener {
 			}
 		}
 
-		frame.add(this);
+		frame.setContentPane(this);
 
 	}
 
