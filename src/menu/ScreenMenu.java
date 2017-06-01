@@ -14,6 +14,7 @@ public class ScreenMenu extends JPanel{
 	private Color yellow = Color.getHSBColor((float)0.14, 1, 1);	
 	private MenuButton startNewGame = new MenuButton("New Game", yellow);
 	private MenuButton loadLevel = new MenuButton("Load a level", yellow);
+	private MenuButton editLevel = new MenuButton("Create new level",yellow);
 	private MenuButton options = new MenuButton ("Options", yellow);
 	private MenuButton quit = new MenuButton("Quit", yellow);
 	private MenuBackground screenLevels;
@@ -24,6 +25,7 @@ public class ScreenMenu extends JPanel{
 	private ScreenMenu(){
 		startNewGame.addActionListener(new StartNewGame());
 		loadLevel.addActionListener(new LevelSelect());
+		editLevel.addActionListener(new EditLevel());
 		options.addActionListener(new Options());
 		quit.addActionListener(new Quit());
 		
@@ -31,11 +33,13 @@ public class ScreenMenu extends JPanel{
 		content.setOpaque(false);
 		content.setLayout(new BoxLayout(content,BoxLayout.PAGE_AXIS));
 		content.add(startNewGame);
-		content.add(Box.createRigidArea(new Dimension(0,40)));
+		content.add(Box.createRigidArea(new Dimension(0,30)));
 		content.add(loadLevel);
-		content.add(Box.createRigidArea(new Dimension(0,40)));
+		content.add(Box.createRigidArea(new Dimension(0,30)));
+		content.add(editLevel);
+		content.add(Box.createRigidArea(new Dimension(0,30)));
 		content.add(options);
-		content.add(Box.createRigidArea(new Dimension(0,40)));
+		content.add(Box.createRigidArea(new Dimension(0,30)));
 		content.add(quit);
 		
 		JPanel centerMenu = new JPanel();
@@ -74,7 +78,14 @@ public class ScreenMenu extends JPanel{
 			w.setVisible(true);
 		}
 	}
-
+	
+	class EditLevel implements ActionListener {
+		public void actionPerformed(ActionEvent arg0){
+			w.setContentPane(EditMenu.getEditMenu());
+			w.setVisible(true);
+		}
+	}
+	
 	class Options implements ActionListener {
 		public void actionPerformed(ActionEvent arg0){
 			ComingSoon tmp_screen = new ComingSoon();
