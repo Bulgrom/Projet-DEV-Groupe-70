@@ -22,7 +22,11 @@ import map.Character;
 		
 		public abstract void setParameters(String[] parameters);
 		
-	
+		
+		public String toString() {
+			return this.getName();
+		}
+		
 		public String getName(){
 			return name;
 		}
