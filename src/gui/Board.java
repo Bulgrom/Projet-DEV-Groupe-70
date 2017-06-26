@@ -61,7 +61,7 @@ public class Board extends JPanel implements ActionListener {
 			@Override
 			public void windowClosing(WindowEvent we) {
 				map.saveMap("saveParty/"+partyName+"/"); // Not Sure about the directory
-				GameLogger.infoLogs("Carte sauvegardée");
+				GameLogger.infoLogs("Carte sauvegardÃ©e");
 				System.exit(0);
 			}
 		});
@@ -80,15 +80,15 @@ public class Board extends JPanel implements ActionListener {
 
 	}
 
-	public void actionPerformed(ActionEvent e) {
+		public void actionPerformed(ActionEvent e) {
 		String[] commandString = e.getActionCommand().split("[^0-9]");
 		int i = Integer.parseInt(commandString[1]);
 		int j = Integer.parseInt(commandString[3]); 
-		if (actionRequested == -1 && map.getMap()[i][j].getCharacter() != null) {
-			// Premier clic sur un carré : on va demander ce qu'on veut faire avec, si ya personne on fait rien
+		if (actionRequested == -1 && map.getMap()[i][j].getCharacter() == null) {System.out.println("Clic sur case vide");}
+		else if (actionRequested == -1 && map.getMap()[i][j].getCharacter() != null) {
+			// Premier clic sur un carrÃ© : on va demander ce qu'on veut faire avec, si ya personne on fait rien
 			this.charRequesting = map.getMap()[i][j].getCharacter();
 			if (charRequesting.equals(controller.getCurrentCharacter())) {
-				System.out.println(Arrays.deepToString(map.getMap()));
 				this.actionRequested = controller.askCommand();
 				if (actionRequested == 0) {
 					this.actionRequested = -1;
@@ -97,11 +97,10 @@ public class Board extends JPanel implements ActionListener {
 				}
 				else {listCase[i][j].showAsSelected();};
 			}
-			else {System.out.println(charRequesting);;};
 		}
 
 		else {
-			// 2eme clic : on applique l'action enregistrée
+			// 2eme clic : on applique l'action enregistrÃ©e
 			Square squareFin = map.getMap()[i][j];
 			controller.applyCommand(squareFin, actionRequested);    
 			this.actionRequested = -1;
@@ -123,7 +122,7 @@ public class Board extends JPanel implements ActionListener {
 
 	
 	public void update() {
-		//Permet de mettre à jour l'affichage + déselectionne tout
+		//Permet de mettre Ã  jour l'affichage + dÃ©selectionne tout
 		for (int i = 0; i< length; i++) {
 			for (int j = 0; j < height; j++) {
 				listCase[i][j].chooseCharacterIcon();
@@ -131,7 +130,7 @@ public class Board extends JPanel implements ActionListener {
 				
 			}
 		}
-		listCase[controller.currentCharacter.getPosition().getCoord()[0]] [controller.currentCharacter.getPosition().getCoord()[1]].showAsCurrentPLayer(); //CurrentPLayer est maintenant entouré de gris foncé
+		listCase[controller.currentCharacter.getPosition().getCoord()[0]] [controller.currentCharacter.getPosition().getCoord()[1]].showAsCurrentPLayer(); //CurrentPLayer est maintenant entourÃ© de gris foncÃ©
 	}
 	
 }
