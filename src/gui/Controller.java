@@ -5,14 +5,19 @@ import map.Character;
 import ability.*;
 import java.util.Scanner;
 import java.util.Hashtable;
-import player.*;
 import party.*;
-import map.Character;
 /* Le controlleur fait le lien entre MatriceBoard et Map.
-L'appui sur un bouton de Matriceboard va trigger une action de controller, qui va faire des trucs en consÈquence */
+L'appui sur un bouton de Matriceboard va trigger une action de controller, qui va faire des trucs en cons√©quence */
 
 
 //TODO : utiliser git
+
+
+//TODO : faire une classe commande, commande en 2 parties showRange, commande en une partie, faire fonction qui renvoit
+//TODO : liste commandes, faire un h√©ritage d'interface ou des booleens? faudra voir avec ability
+//TODO : g√©rer la victoire
+//TODO : faire du son
+
 
 public class Controller {
 
@@ -24,7 +29,8 @@ public class Controller {
 		this.listCase = listCase;
 		this.partyInterface = partyInterface;
 		this.currentCharacter = partyInterface.getCurrentPlayer().getCurrentCharacter();
-		System.out.println("C'est ‡ " + currentCharacter.getName() + " de commencer !");
+		System.out.println("C'est √† " + currentCharacter.getName() + ", controll√© par " + partyInterface.getCurrentPlayer() 
+		+ " de commencer !");
 	}
 
 	public Character getCurrentCharacter() {
@@ -34,31 +40,43 @@ public class Controller {
 	public int askCommand() {
 		Scanner scan = new Scanner(System.in);
 		Hashtable<Integer, Ability> abilityNumbers = showMeYourMoves();
-		System.out.println("Entrez la commande dÈsirÈe");
+		System.out.println("Entrez la commande d√©sir√©e");
 		
-		// TODO mettre toutes les conditions en fonction des actions rentrÈes
-		// Faire un failsafe de si on sait pas Ècrire pour que la machine
+		// TODO mettre toutes les conditions en fonction des actions rentr√©es
+		// Faire un failsafe de si on sait pas √©crire pour que la machine
 		// redemande la commande
+		try {
 		int command = scan.nextInt();
 		if (command == 0) {
 			this.endTurn();
-			System.out.println("Fin du tour");
-			System.out.println("C'est ‡ " + currentCharacter.getName() + " de jouer !");
 		}
 		if (command == 1) {
 			showMovementRange();
 		}
-		if (abilityNumbers.containsKey(command)) { // Si la commande demandÈe
-													// est une capacitÈ
+		if (abilityNumbers.containsKey(command)) { // Si la commande demand√©e
+													// est une capacit√©
 			Ability ability = abilityNumbers.get(command);
 			showRange(abilityNumbers.get(command), currentCharacter.getPosition());
 		}
+		if(!(abilityNumbers.containsKey(command)) && command != 0 && command != 1) {
+			System.out.println("Erreur : commande non valide");
+			return -1;
+		}
+		//scan.close(); fait planter, idk why
 		return command;
+		
+		}
+		catch (Exception e) {
+			System.out.println("Erreur : commande non valide");
+			return -1;
+		}
 	}
 
 	public void endTurn() {
 		partyInterface.endTurn(currentCharacter);
 		this.currentCharacter = partyInterface.getCurrentPlayer().getCurrentCharacter();
+		System.out.println("Fin du tour");
+		System.out.println("C'est √† " + currentCharacter.getName() + " de jouer !");
 
 
 	}
@@ -67,9 +85,9 @@ public class Controller {
 	public Hashtable<Integer, Ability> showMeYourMoves() {
 		System.out.println("Commandes possibles : \n");
 		System.out.println("0 - Fin de tour");
-		System.out.println("1 - DÈplacement");
+		System.out.println("1 - D√©placement");
 		int abilityLength = currentCharacter.getAbilityLength();
-		Hashtable<Integer, Ability> abilityNumbers = new Hashtable<Integer, Ability>(); // contient tous les entiers i tq i corresponde ‡ une ability
+		Hashtable<Integer, Ability> abilityNumbers = new Hashtable<Integer, Ability>(); // contient tous les entiers i tq i corresponde √† une ability
 		for (int i = 0; i < abilityLength; i++) {
 			System.out.println(i + 2 + " - " + currentCharacter.getAbility(i).toString() + "\n");
 			abilityNumbers.put(i + 2, currentCharacter.getAbility(i));
@@ -103,7 +121,7 @@ public class Controller {
 	public void applyCommand(Square squareFin, int actionID) {
 		if (actionID == 1) {
 			currentCharacter.move(squareFin);
-			System.out.println("Mouvement de " + currentCharacter.getName() + " effectuÈ");
+			System.out.println("Mouvement de " + currentCharacter.getName() + " effectu√©");
 		} else {
 			try {
 				Ability ability = currentCharacter.getAbility(actionID - 2);
