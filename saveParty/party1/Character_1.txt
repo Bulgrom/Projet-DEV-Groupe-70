@@ -1,0 +1,13 @@
+Jamy
+1
+50_50
+3_3
+6_6
+20_20
+30_30
+30
+1
+1
+HEALTHY
+jamy
+ability.damageAbility.Punch-50_ability.damageAbility.BasicArrow-50-4_

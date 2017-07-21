@@ -1,5 +1,4 @@
 package menu;
-
 import java.awt.Dimension;
 
 import javax.swing.JFrame;
@@ -15,6 +14,5 @@ public class Menu {
 			window.setLocationRelativeTo(null);
 			window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			window.setVisible(true);
-		
 	}       
 }

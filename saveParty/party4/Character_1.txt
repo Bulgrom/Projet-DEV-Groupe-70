@@ -1,0 +1,13 @@
+pers1
+1
+1000_1000
+3_3
+6_6
+20_20
+30_30
+30
+1
+1
+HEALTHY
+None
+ability.damageAbility.Punch-50_ability.damageAbility.BasicArrow-50-4_
